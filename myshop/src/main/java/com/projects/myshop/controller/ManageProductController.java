@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projects.myshop.Service.ManageProductService;
@@ -25,6 +26,7 @@ import com.projects.myshop.model.ProductDetailsModel;
 
 
 @RestController
+@RequestMapping("/Product")
 public class ManageProductController {
 
 	@Autowired
@@ -37,13 +39,13 @@ public class ManageProductController {
 		if(re != null) {	
 			ProductTypesEntity pdtype = manageProductService.addNewProductTypes(typeName);
 			if(pdtype != null) {
-				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Type Added Successfully",HttpStatus.OK));
+				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Type Added Successfully",HttpStatus.OK,"success"));
 
 			}else {
-				return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new ResponseMessageClass<Object>("New Type Not Added, Please Try Again!!",HttpStatus.NOT_MODIFIED));
+				return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new ResponseMessageClass<Object>("New Type Not Added, Please Try Again!!",HttpStatus.NOT_MODIFIED,"warning"));
 			}
 		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
 	
@@ -53,13 +55,13 @@ public class ManageProductController {
 		if(re != null) {	
 			ProductDetailsEntity pdDetails = manageProductService.addNewProduct(detailsModel,re);
 			if(pdDetails != null) {
-				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Product Added Successfully",HttpStatus.OK));
+				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Product Added Successfully",HttpStatus.OK,"success"));
 
 			}else {
-				return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new ResponseMessageClass<Object>("New Product Not Added, Please Try Again!!",HttpStatus.NOT_MODIFIED));
+				return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new ResponseMessageClass<Object>("New Product Not Added, Please Try Again!!",HttpStatus.NOT_MODIFIED,"warning"));
 			}
 		}else {		
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
 	
@@ -69,13 +71,13 @@ public class ManageProductController {
 		if(re != null) {	
 			Optional<ProductDetailsEntity> pdDetails = manageProductService.getProductById(prodID);
 			if(pdDetails.isPresent()){
-				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(pdDetails,HttpStatus.OK));
+				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(pdDetails,HttpStatus.OK,"success"));
 				
 			}else {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Product Not Exits",HttpStatus.BAD_REQUEST));
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Product Not Exits",HttpStatus.BAD_REQUEST,"warning"));
 			}
 		}else {		
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
 }

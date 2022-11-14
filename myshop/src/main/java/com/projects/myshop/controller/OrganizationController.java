@@ -30,11 +30,11 @@ public class OrganizationController {
 		Registration re = InfoClass.getCurrentUser(request);	
 		if(re != null) {	
 			OrganizationEntity orgEn = organizationService.addOrganizationInfo(model, re);
-			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(orgEn,HttpStatus.OK));
+			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(orgEn,HttpStatus.OK,"success"));
 
 		}else {
 			
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
 	

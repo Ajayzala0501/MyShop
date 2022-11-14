@@ -36,6 +36,7 @@ public class Registration {
 	
 	private Date UpdatedDate;
 	
+	private String role="USER";
 	
 	public long getId() {
 		return id;
@@ -113,6 +114,14 @@ public class Registration {
 		int max = 9999;
 		int b = (int)(Math.random()*(max-min+1)+min);  
 		return "USERID"+String.valueOf(b);
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	

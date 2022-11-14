@@ -3,6 +3,7 @@ package com.projects.myshop.Service.Impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.projects.myshop.Service.RegistrationService;
@@ -17,13 +18,16 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Autowired
 	RegistrationRepository registrationRepository;
 	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Override
 	public Registration addRegistration(RegistrationModel model) {
 		// TODO Auto-generated method stub
 		Registration re = new Registration();
 		re.setUsername(model.getUsername());
 		re.setEmail(model.getEmail());
-		re.setPassword(model.getPassword());
+		re.setPassword(bCryptPasswordEncoder.encode(model.getPassword()));
 		return registrationRepository.save(re);
 	}
 

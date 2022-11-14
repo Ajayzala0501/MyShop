@@ -13,4 +13,7 @@ public interface RegistrationRepository  extends JpaRepository<Registration, Lon
 	Optional<Registration> findByEmail(String email);
  	
 	Optional<Registration> findByEmailAndPassword(String email, String password);
+	
+	Optional<Registration> findByUsername(String username);
+ 	
 }

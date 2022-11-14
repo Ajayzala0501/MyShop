@@ -16,7 +16,7 @@ public class ExceptionResponseClass  extends ResponseEntityExceptionHandler{
 
 	@ExceptionHandler(EmailAlreadyExits.class)
 	public ResponseEntity<ResponseMessageClass<Object>> emailAlreadyExits(EmailAlreadyExits exception){
-		ResponseMessageClass re = new ResponseMessageClass(exception.getMessage(),HttpStatus.ALREADY_REPORTED);
+		ResponseMessageClass re = new ResponseMessageClass(exception.getMessage(),HttpStatus.ALREADY_REPORTED,"warning");
 		return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(re);
 	}
 	
