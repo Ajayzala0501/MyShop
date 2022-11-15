@@ -1,5 +1,6 @@
 package com.projects.myshop.controller;
 
+import org.springframework.security.access.event.PublicInvocationEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,9 +11,9 @@ public class ViewController {
 		return "index";
 	}
 	
-	@GetMapping("/signin")
+	@GetMapping("/login")
 	public String login() {
-		return "signin";
+		return "login";
 	}
 	
 	@GetMapping("/registerPageLink")
@@ -24,4 +25,10 @@ public class ViewController {
 	public String emptypage() {
 		return "base_page";
 	}
+	
+	@GetMapping("/forgotPassword")
+		public String forgotPassword() {
+		return "forgot_password";
+	}
+	
 }

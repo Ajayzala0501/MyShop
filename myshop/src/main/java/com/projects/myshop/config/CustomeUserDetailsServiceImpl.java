@@ -19,10 +19,9 @@ public class CustomeUserDetailsServiceImpl implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
  Optional<Registration>	reg =registrationRepository.findByUsername(username);
-if(reg.isPresent()) {
+if(reg.isEmpty()) {
 	throw new UsernameNotFoundException("User Not Found");
-}		
- return new CustomeUserDetailsImpl(reg.get());
+	}		
+ 	return new CustomeUserDetailsImpl(reg.get());
 	}
-
 }

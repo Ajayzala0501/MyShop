@@ -32,8 +32,8 @@ public class RegistrationServiceImpl implements RegistrationService{
 	}
 
 	@Override
-	public Optional<Registration> checkEmailAlreadyExits(String email) {
-		return registrationRepository.findByEmail(email);
+	public Optional<Registration> checkEmailAlreadyExits(String email,String username) {
+		return registrationRepository.findByEmailAndUsername(email,username);
 	}
 
 	@Override

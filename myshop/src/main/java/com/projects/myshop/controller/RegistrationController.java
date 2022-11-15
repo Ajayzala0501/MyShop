@@ -35,9 +35,9 @@ public class RegistrationController {
 	
 	@PostMapping("/registration")
 		public ResponseEntity<ResponseMessageClass<Object>> addRegistration(@RequestBody RegistrationModel model) throws com.projects.myshop.exception.MainExceptionClass.EmailAlreadyExits{	
-		Optional<Registration> checkEmail = registrationService.checkEmailAlreadyExits(model.getEmail());
+		Optional<Registration> checkEmail = registrationService.checkEmailAlreadyExits(model.getEmail(),model.getUsername());
 	 	if(checkEmail.isPresent()){
-	 		throw mainExceptionClass.new EmailAlreadyExits("Email Already Exits");
+	 		throw mainExceptionClass.new EmailAlreadyExits("Email Or Username Already Exits");
 	 	}
 		Registration re = registrationService.addRegistration(model);
 	 	if(re != null) {	
@@ -46,18 +46,5 @@ public class RegistrationController {
 	 	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Registration Not Success!!!", HttpStatus.BAD_REQUEST,"warning"));
 	}
 
-	/*
-	 * @PostMapping("/login") public ResponseEntity<ResponseMessageClass<Object>>
-	 * checkLogin(@RequestBody LoginModel loginModel, HttpServletRequest request){
-	 * Optional<Registration> loginUser =
-	 * registrationService.checkLogin(loginModel); if(!loginUser.isEmpty()
-	 * &&loginModel.getEmail().equals(loginUser.get().getEmail()) &&
-	 * loginModel.getPassword().equals(loginUser.get().getPassword())) { HttpSession
-	 * ses = request.getSession(); ses.setAttribute("CurrentUser", loginUser.get());
-	 * return ResponseEntity.status(HttpStatus.OK).body(new
-	 * ResponseMessageClass<Object>("Login Successfull", HttpStatus.OK,"success"));
-	 * }else { return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new
-	 * ResponseMessageClass<Object>("Bad User", HttpStatus.BAD_REQUEST,"error")); }
-	 * }
-	 */
+
 }

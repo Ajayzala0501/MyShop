@@ -10,7 +10,7 @@ import com.projects.myshop.enitity.Registration;
 @Repository
 public interface RegistrationRepository  extends JpaRepository<Registration, Long>{
 
-	Optional<Registration> findByEmail(String email);
+	Optional<Registration> findByEmailAndUsername(String email,String username);
  	
 	Optional<Registration> findByEmailAndPassword(String email, String password);
 	

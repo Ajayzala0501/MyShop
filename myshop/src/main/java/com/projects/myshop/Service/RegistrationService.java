@@ -10,7 +10,7 @@ public interface RegistrationService {
 
 	Registration addRegistration(RegistrationModel model);
 
-	Optional<Registration> checkEmailAlreadyExits(String email);
+	Optional<Registration> checkEmailAlreadyExits(String email,String username);
 
 	Optional<Registration> checkLogin(LoginModel loginModel);
 

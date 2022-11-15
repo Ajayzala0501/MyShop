@@ -13,25 +13,26 @@
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
         <!-- Toastr style -->
     <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
-   
 </head>
 
 <body class="gray-bg">
-
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-
                 <h1 class="logo-name">MS</h1>
-
             </div>
             <h3>Welcome to MS</h3>
-            
+
             <p>Login in. To see it in action.</p>
-            <form class="m-t" role="form" id="form" >
+            <form class="m-t" th:action="@{/login}" role="form" id="form" method="POST" >
+            <div th:if="${param.error}" class="alert alert-danger">
+            	Invalid Username and Password
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+            	You are logout!!!!
+            </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="">
                 </div>
@@ -78,30 +79,6 @@
                              required:"Please fill the username field"},
                              password:{
                              required:"Please fill the password field"},                         
-                   },
-                   submitHandler:function(form,e){
-                   e.preventDefault();
-                   
-                   var Formdata = {
-                   		username:$("#username").val(),
-                   		password: $("#password").val()
-                   } 
-					$.ajax({
-		                type: "POST",
-        				contentType: "application/x-www-form-urlencoded",
-				        url: "/login",
-				        data: Formdata,
-				        dataType: 'json',
-		                success: function(data) {
-		               	if(data["status"] =="OK"){
-		               	alert("done");
-		               	}        
-		                },
-		                error : function(error) {
-		
-		                }
-		            })
-		                   
                    }
              });
         });

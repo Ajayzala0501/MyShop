@@ -94,7 +94,6 @@
                    		email:$("#email").val(),
                    		password: $("#password").val()
                    } 
-
 					$.ajax({
 		                type: "POST",
 				        contentType: "application/json",
@@ -103,23 +102,20 @@
 				        dataType: 'json',
 		                success: function(data) {
 		               	if(data["status"] =="OK"){
-		               	alert("done");
+		               	window.location.href = "/login";
+
 		               	}else{
-		               	
 		               	showMessage(data["result"],data["msgType"]);
 		               }        
 		                },
 		                error : function(error) {
-		
 		                }
 		            })
-		                   
                    }
              });
         });
         
-        function showMessage(result,msgType){
-        		                
+        function showMessage(result,msgType){  		                
 		        setTimeout(function() {
                 toastr.options = {
                     closeButton: true,
@@ -128,10 +124,7 @@
                     timeOut: 4000
                 };
                toastr[msgType](result);
-
-            }, 1300);
-		        
-        
+            }, 1300); 
         }
     </script>
 </body>
