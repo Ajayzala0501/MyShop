@@ -38,6 +38,10 @@ public class Registration {
 	
 	private String role="USER";
 	
+	private String token;
+	
+	private Date tokenExpirationTime;
+	
 	public long getId() {
 		return id;
 	}
@@ -122,6 +126,22 @@ public class Registration {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Date getTokenExpirationTime() {
+		return tokenExpirationTime;
+	}
+
+	public void setTokenExpirationTime(Date tokenExpirationTime) {
+		this.tokenExpirationTime = tokenExpirationTime;
 	}
 
 	

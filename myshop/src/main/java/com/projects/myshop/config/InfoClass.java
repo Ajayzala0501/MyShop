@@ -10,6 +10,7 @@ public class InfoClass {
 	public static HttpSession ses = null;
 	
 	public static Registration getCurrentUser(HttpServletRequest request) {
+		
 		ses = request.getSession();
 		return (Registration)ses.getAttribute("CurrentUser");
 	}

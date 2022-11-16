@@ -16,4 +16,14 @@ public class MainExceptionClass {
 		}
 	}
 	
+	public class EmailNotRegistered extends Exception{
+		
+		public EmailNotRegistered() {
+			// TODO Auto-generated constructor stub
+		}
+		
+		public EmailNotRegistered(String  msg){
+			super(msg);
+		}
+	}
 }

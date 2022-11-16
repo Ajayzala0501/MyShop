@@ -1,5 +1,6 @@
 package com.projects.myshop.Service.Impl;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,29 @@ public class RegistrationServiceImpl implements RegistrationService{
 		return registrationRepository.findByEmailAndPassword(loginModel.getEmail(), loginModel.getPassword());
 	}
 
+	@Override
+	public Optional<Registration> findByemail(String email) {
+		// TODO Auto-generated method stub
+		return registrationRepository.findByEmail(email);
+	}
+
+	public Registration saveData(Registration registration){
+		return registrationRepository.save(registration);
+	}
+
+	@Override
+	public Boolean verifyToken(String token) {
+		Optional<Registration> reg = registrationRepository.findByToken(token);
+		if(reg.isPresent()) {
+			Date d = new Date();
+			if(d.compareTo(reg.get().getTokenExpirationTime()) < 0 ) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	
 }

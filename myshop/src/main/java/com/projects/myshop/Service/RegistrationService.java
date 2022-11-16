@@ -14,4 +14,9 @@ public interface RegistrationService {
 
 	Optional<Registration> checkLogin(LoginModel loginModel);
 
+	Optional<Registration> findByemail(String email);
+	
+	 Registration saveData(Registration registration);
+	 
+	 Boolean verifyToken(String token);
 }
