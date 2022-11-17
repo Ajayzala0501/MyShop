@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,11 +41,16 @@ public class WebConfiguration  extends WebSecurityConfigurerAdapter{
 		// TODO Auto-generated method stub
 		auth.authenticationProvider(authenticationProvider());
 	}
-
+	 @Override
+	    public void configure(WebSecurity web) throws Exception {
+	        web
+		       .ignoring()
+		       .antMatchers("/resources/**","/templates/**", "/static/**", "/css/**", "/js/**", "/img/**", "/fonts/**", "/email_templates/**","/font-awesome/**","/LESS/**","/locales/**","/pdf/**");
+	    }
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stubhttp.authorizeRequests()
-		http.authorizeRequests().antMatchers("/Product/**").hasRole("USER").antMatchers("/**").permitAll().and().formLogin().loginPage("/login").defaultSuccessUrl("/")  
+		http.authorizeRequests().antMatchers("/Product/**","/ViewProduct/**").hasAuthority("USER").antMatchers("/emptyPage","/registerPageLink","/forgotPassword","/verifyToken","/verifyTokenForRegistration","/Registration/**","/login").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")  
 	      .defaultSuccessUrl("/",true)
 	      .failureUrl("/login?error=true").and().csrf().disable();
 	}	
