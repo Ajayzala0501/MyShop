@@ -11,47 +11,51 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class ProductTypesEntity {
-
-	
+public class ProductCompanyEntity {
 	@Id
-	@SequenceGenerator(name = "productTypes_Sequence", sequenceName = "productTypes_Sequence", allocationSize = 1)
-	@GeneratedValue(generator = "productTypes_Sequence", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "productCompany_Sequence", sequenceName = "productCompany_Sequence", allocationSize = 1)
+	@GeneratedValue(generator = "productCompany_Sequence", strategy = GenerationType.SEQUENCE)
 	private long id;
 	
-	private String typeId;
+	private String companyId;
 	
-	private String typeName;
+	private String companyName;
 	
 	private Date createdDate;
 	
 	private Date updtaedDate;
-
-	public ProductTypesEntity() {
-		Date d = new Date();
-		setCreatedDate(d);
-		setUpdtaedDate(d);
-		setTypeId(generateTypeCode());
-	}
+	
 	@OneToOne
 	@JoinColumn(name = "obj_ref_id",referencedColumnName = "orgid")
 	private Registration registration;
 
-	public String getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
-	}
-
-	public String getTypeName() {
-		return typeName;
-	}
 	
+	public Registration getRegistration() {
+		return registration;
+	}
+	public void setRegistration(Registration registration) {
+		this.registration = registration;
+	}
+	public ProductCompanyEntity() {
+		Date d = new Date();
+		setCreatedDate(d);
+		setUpdtaedDate(d);
+		setCompanyId(generateTypeCode());
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public Date getCreatedDate() {
@@ -77,5 +81,4 @@ public class ProductTypesEntity {
 		return "TYPEID"+String.valueOf(b);
 		
 	}
-	
 }

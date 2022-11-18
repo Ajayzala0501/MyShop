@@ -1,164 +1,316 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="base_page ::Layout('New Product Page',~{::link},~{:: .main-section},~{::script},~{:: .header-section})">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base_page ::Layout('New Product Page',~{::link},~{:: .main-section},~{::script},~{:: .header-section})">
+
 <head>
-<title>Add New Product Page</title>
-<link th:href="@{/#}"  rel="stylesheet"></link>
+	<title>Add New Product Page</title>
+	<link th:href="@{/css/plugins/select2/select2.min.css}" rel="stylesheet">
+	</link>
+	<link th:href="@{/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css}" rel="stylesheet">
+
 </head>
+
 <body>
-<div class="header-section">
-   <div class="col-sm-4">
-                    <h2>Add New Product</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">This is</a>
-                        </li>
-                        <li class="active">
-                            <strong>Breadcrumb</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-sm-8">
-                    <div class="title-action">
-                        <a href="" class="btn btn-primary">This is action area</a>
-                    </div>
-                </div>
-</div>
-<div class="main-section">
-	<div class="row">	
-	<div class="col-lg-7">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Basic IN+ Panel <small class="m-l-sm">This is custom panel</small></h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <h2 >
-                            This is standard IN+ Panel<br/>
-                        </h2>
-                        <p>
-                            <strong>Lorem ipsum dolor</strong>
-                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
-                        <p>
-                            <small>
-                                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-                            </small>
-                        </p>
-                    </div>
-                    <div class="ibox-footer">
-                        <span class="pull-right">
-                          The righ side of the footer
-                    </span>
-                        This is simple footer example
-                    </div>
-                </div>
-            </div>
-	<div class="col-lg-5">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Basic IN+ Panel <small class="m-l-sm">This is custom panel</small></h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <h2 >
-                            This is standard IN+ Panel<br/>
-                        </h2>
-                        <p>
-                            <strong>Lorem ipsum dolor</strong>
-                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
-                        <p>
-                            <small>
-                                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-                            </small>
-                        </p>
-                    </div>
-                    <div class="ibox-footer">
-                        <span class="pull-right">
-                          The righ side of the footer
-                    </span>
-                        This is simple footer example
-                    </div>
-                </div>
-            </div>
+	<div class="header-section">
+		<div class="col-sm-4">
+			<h2>Add New Product</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="index.html">Manage Product</a>
+				</li>
+				<li class="active">
+					<strong>Add New Product</strong>
+				</li>
+			</ol>
+		</div>
+
+	</div>
+	<div class="main-section">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Add New Product Information </h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+
+						</div>
+					</div>
+					<div class="ibox-content">
+						<form role="form" id="productInfoForm">
+							<div class="row">
+								<div class="col-sm-12">
+									<div id="error" style=" padding: 7px;" class="alert alert-danger">
+										<p>Erorrrr</p>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div><label>Product Type</label>
+										<select class="select2_demo_3 form-control">
+											<option></option>
+											<option value="Bahamas">Bahamas</option>
+											<option value="Bahrain">Bahrain</option>
+											<option value="Bangladesh">Bangladesh</option>
+											<option value="Barbados">Barbados</option>
+											<option value="Belarus">Belarus</option>
+											<option value="Belgium">Belgium</option>
+											<option value="Belize">Belize</option>
+											<option value="Benin">Benin</option>
+										</select>
+
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label>Product Company</label>
+										<select class="select2_demo_3 form-control">
+											<option></option>
+											<option value="Bahamas">Bahamas</option>
+											<option value="Bahrain">Bahrain</option>
+											<option value="Bangladesh">Bangladesh</option>
+											<option value="Barbados">Barbados</option>
+											<option value="Belarus">Belarus</option>
+											<option value="Belgium">Belgium</option>
+											<option value="Belize">Belize</option>
+											<option value="Benin">Benin</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label>Product Model</label>
+
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label>Product Color</label>
+
+										<input type="color" class="form-control">
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3">
+									<div><label>Product Size/Capacity</label>
+										<select class="select2_demo_3 form-control">
+											<option></option>
+											<option value="Bahamas">Bahamas</option>
+											<option value="Bahrain">Bahrain</option>
+											<option value="Bangladesh">Bangladesh</option>
+											<option value="Barbados">Barbados</option>
+											<option value="Belarus">Belarus</option>
+											<option value="Belgium">Belgium</option>
+											<option value="Belize">Belize</option>
+											<option value="Benin">Benin</option>
+										</select>
+
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group"><label>Product RAM</label>
+										<select class="select2_demo_3 form-control">
+											<option></option>
+											<option value="Bahamas">Bahamas</option>
+											<option value="Bahrain">Bahrain</option>
+											<option value="Bangladesh">Bangladesh</option>
+											<option value="Barbados">Barbados</option>
+											<option value="Belarus">Belarus</option>
+											<option value="Belgium">Belgium</option>
+											<option value="Belize">Belize</option>
+											<option value="Benin">Benin</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group"><label>Product ROM</label>
+										<select class="select2_demo_3 form-control">
+											<option></option>
+											<option value="Bahamas">Bahamas</option>
+											<option value="Bahrain">Bahrain</option>
+											<option value="Bangladesh">Bangladesh</option>
+											<option value="Barbados">Barbados</option>
+											<option value="Belarus">Belarus</option>
+											<option value="Belgium">Belgium</option>
+											<option value="Belize">Belize</option>
+											<option value="Benin">Benin</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group"><label>TV Type</label>
+										<select class="select2_demo_3 form-control">
+											<option></option>
+											<option value="Bahamas">Bahamas</option>
+											<option value="Bahrain">Bahrain</option>
+											<option value="Bangladesh">Bangladesh</option>
+											<option value="Barbados">Barbados</option>
+											<option value="Belarus">Belarus</option>
+											<option value="Belgium">Belgium</option>
+											<option value="Belize">Belize</option>
+											<option value="Benin">Benin</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label>Product Quntity</label>
+
+										<input class="touchspin1" type="text" value="" name="demo1">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label>Product Price</label>
+
+										<input type="number" class="form-control " min="1" step="any" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-1">
+									<button class="btn btn-sm btn-primary m-t-n-xs"
+										type="submit"><strong>Submit</strong></button>
+
+								</div>
+								<div class="col-1"></div>
+								<div class="col-sm-1">
+									<button class="btn btn-sm btn-danger m-t-n-xs"
+										type="submit"><strong>Reset</strong></button>
+
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="ibox-footer">
+						<span class="pull-right">
+							The righ side of the footer
+						</span>
+						This is simple footer example
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Add New Product Type</h5>
+								<div class="ibox-tools">
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+
+								</div>
+							</div>
+							<div class="ibox-content">
+								<form role="form" id="productTypeForm">
+									<div class="row">
+										<div class="col-sm-12">
+											<div id="error" style=" padding: 7px;" class="alert alert-danger">
+												<p>Erorrrr</p>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group"><label>Product Type</label>
+
+												<input type="text" name="productTypeName" id="productTypeName" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-1">
+											<div class="form-group">
+
+												<button class="btn btn-sm btn-primary m-t-n-xs text-center"
+													type="submit"><strong>Add Type</strong></button>
+											</div>
+										</div>
+										<div class="col-sm-2"></div>
+										<div class="col-sm-1">
+											<button class="btn btn-sm btn-danger m-t-n-xs"
+												type="submit"><strong>Reset</strong></button>
+
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Add New Product Company</h5>
+								<div class="ibox-tools">
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+
+								</div>
+							</div>
+							<div class="ibox-content">
+								<form role="form" id="productCompanyForm">
+									<div class="row">
+										<div class="col-sm-12">
+											<div id="error" style=" padding: 7px;" class="alert alert-danger">
+												<p>Error</p>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+
+										<div class="col-sm-12">
+											<div class="form-group"><label>Product Company</label>
+
+												<input type="text" name="productCompanyName" required id="productCompanyName" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-1">
+											<div class="form-group">
+
+												<button class="btn btn-sm btn-primary m-t-n-xs text-center"
+													type="submit"><strong>Add Company</strong></button>
+											</div>
+										</div>
+										<div class="col-sm-3"></div>
+										<div class="col-sm-1">
+											<button class="btn btn-sm btn-danger m-t-n-xs"
+												type="submit"><strong>Reset</strong></button>
+
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script th:src="@{/js/plugins/select2/select2.full.min.js}"></script>
+	<!-- TouchSpin -->
+	<script th:src="@{/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js}"></script>
 	
-	</div>
-	<div class="row">	
-	<div class="col-lg-7">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Basic IN+ Panel <small class="m-l-sm">This is custom panel</small></h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <h2 >
-                            This is standard IN+ Panel<br/>
-                        </h2>
-                        <p>
-                            <strong>Lorem ipsum dolor</strong>
-                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
-                        <p>
-                            <small>
-                                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-                            </small>
-                        </p>
-                    </div>
-                    <div class="ibox-footer">
-                        <span class="pull-right">
-                          The righ side of the footer
-                    </span>
-                        This is simple footer example
-                    </div>
-                </div>
-            </div>
-	</div>
-</div>
-<script th:src="@{/#}"></script>
+	<script th:src="@{/js/customjs/addNewProduct.js}"></script>
+	
+	<!-- Select2 -->
 </body>
+
 </html>

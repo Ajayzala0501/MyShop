@@ -32,8 +32,8 @@ public class ManageProductController {
 	@Autowired
 	ManageProductService manageProductService;
 	
-	@PostMapping("/addNewProductTypes/{typeName}")
-	public ResponseEntity<ResponseMessageClass<Object>>addNewProductTypes(@PathVariable("typeName") String typeName, HttpServletRequest request){
+	@PostMapping("/addNewProductTypes")
+	public ResponseEntity<ResponseMessageClass<Object>>addNewProductTypes(@RequestBody String typeName, HttpServletRequest request){
 
 		Registration re = InfoClass.getCurrentUser(request);	
 		if(re != null) {	

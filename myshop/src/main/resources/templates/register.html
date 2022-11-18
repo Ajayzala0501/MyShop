@@ -3,131 +3,136 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Register</title>
+	<title>INSPINIA | Register</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 
-        <!-- Toastr style -->
-    <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+	<!-- Toastr style -->
+	<link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
 
 </head>
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen   animated fadeInDown">
-        <div>
-            <div>
-                <h1 class="logo-name">MS</h1>
-            </div>
-            <h3>Register to MS</h3>
-            <p>Create account to see it in action.</p>
-            <form class="m-t" role="form" id="form" action="#">
-              <div hidden id="error" class="alert alert-danger">
-				<p></p>
+	<div class="middle-box text-center loginscreen   animated fadeInDown">
+		<div>
+			<div>
+				<h1 class="logo-name">MS</h1>
+			</div>
+			<h3>Register to MS</h3>
+			<p>Create account to see it in action.</p>
+			<form class="m-t" role="form" id="form" action="#">
+				<div hidden id="error" class="alert alert-danger">
+					<p></p>
 				</div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required="">
-                </div>
-                
-                <button type="submit" id="submit" class="btn btn-primary block full-width m-b">Register</button>
+				<div class="form-group">
+					<input type="text" class="form-control" name="username" id="username" placeholder="Username"
+						required="">
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="password" id="password" placeholder="Password"
+						required="">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
+						placeholder="Confirm Password" required="">
+				</div>
 
-                <p class="text-muted text-center"><small>Already have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" th:href="@{/login}">Login</a>
-            </form>
-        </div>
-    </div>
+				<button type="submit" id="submit" class="btn btn-primary block full-width m-b">Register</button>
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
-    
-    <!-- Jquery Validate -->
-    <script src="js/plugins/validate/jquery.validate.min.js"></script>
-    
-        <!-- Toastr -->
-    <script src="js/plugins/toastr/toastr.min.js"></script>
-    
-    <script>
-        $(document).ready(function(){
-             $("#form").validate({
-                 rules: {
-                     password: {
-                         required: true,
-                         minlength: 3
-                     },
-                     username:{
-                     	required:true
-                     },
-                     email:{
-                         required: true
-                     },
-                     confirmPassword:{
-                        equalTo: "#password"
-                     }
-                 },
-                   messages: {
-                            confirmPassword:{
-                             required:"Enter Confirm Password Same as Password"}
-                   },
-                   submitHandler:function(form,e){
-                   e.preventDefault();
-                   
-                   var Formdata = {
-                   		username:$("#username").val(),
-                   		email:$("#email").val(),
-                   		password: $("#password").val()
-                   } 
-                   $("#error").show();
+				<p class="text-muted text-center"><small>Already have an account?</small></p>
+				<a class="btn btn-sm btn-white btn-block" th:href="@{/login}">Login</a>
+			</form>
+		</div>
+	</div>
+
+	<!-- Mainly scripts -->
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- iCheck -->
+	<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+	<!-- Jquery Validate -->
+	<script src="js/plugins/validate/jquery.validate.min.js"></script>
+
+	<!-- Toastr -->
+	<script src="js/plugins/toastr/toastr.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$("#form").validate({
+				rules: {
+					password: {
+						required: true,
+						minlength: 3
+					},
+					username: {
+						required: true
+					},
+					email: {
+						required: true
+					},
+					confirmPassword: {
+						equalTo: "#password"
+					}
+				},
+				messages: {
+					confirmPassword: {
+						required: "Enter Confirm Password Same as Password"
+					}
+				},
+				submitHandler: function (form, e) {
+					e.preventDefault();
+
+					var Formdata = {
+						username: $("#username").val(),
+						email: $("#email").val(),
+						password: $("#password").val()
+					}
+					$("#error").show();
 					$('#error').removeClass('alert-danger');
-    				$("#error").addClass('alert-success');
-		             $("#error p").html("Please wait.. while generating token!!!");
+					$("#error").addClass('alert-success');
+					$("#error p").html("Please wait.. while generating token!!!");
 					$.ajax({
-		                type: "POST",
-				        contentType: "application/json",
-				        url: "/Registration/registrationVerification",
-				        data: JSON.stringify(Formdata),
-				        dataType: 'json',
-		                success: function(data) {
-		               	if(data["status"] =="OK"){
-		            	$("#error").show();
-							$('#error').removeClass('alert-danger');
-    						$("#error").addClass('alert-success');
-		               		$("#error p").html("Token is send to registered email, Please Check!!");
+						type: "POST",
+						contentType: "application/json",
+						url: "/Registration/registrationVerification",
+						data: JSON.stringify(Formdata),
+						dataType: 'json',
+						success: function (data) {
+							if (data["status"] == "OK") {
+								$("#error").show();
+								$('#error').removeClass('alert-danger');
+								$("#error").addClass('alert-success');
+								$("#error p").html("Token is send to registered email, Please Check!!");
 
-		               	}else{
-		               	showMessage(data["result"],data["msgType"]);
-		               }        
-		                },
-		                error : function(error) {$("#error").show();
-		                	$('#error').removeClass('alert-success');
-    						$("#error").addClass('alert-danger');
-							 $("#error p").html(error.responseJSON["result"]);
-		                }
-		            })
-                   }
-             });
-        });
-        
-     
-    </script>
+							} else {
+								showMessage(data["result"], data["msgType"]);
+							}
+						},
+						error: function (error) {
+							$("#error").show();
+							$('#error').removeClass('alert-success');
+							$("#error").addClass('alert-danger');
+							$("#error p").html(error.responseJSON["result"]);
+						}
+					})
+				}
+			});
+		});
+
+
+	</script>
 </body>
 
 </html>

@@ -60,7 +60,6 @@ public class ProductDetailsEntity {
 		return productsEntity;
 	}
 
-
 	public void setProductsEntity(ProductsEntity productsEntity) {
 		this.productsEntity = productsEntity;
 	}
