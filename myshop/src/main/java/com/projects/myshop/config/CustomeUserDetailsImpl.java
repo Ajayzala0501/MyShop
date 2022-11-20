@@ -43,6 +43,11 @@ public class CustomeUserDetailsImpl implements UserDetails{
 		return registration.getUsername();
 	}
 
+	public Registration getRegistration() {
+		return registration;
+	}
+	
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub

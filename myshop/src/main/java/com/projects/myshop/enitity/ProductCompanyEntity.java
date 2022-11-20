@@ -78,7 +78,7 @@ public class ProductCompanyEntity {
 		int min = 1000;  
 		int max = 9999;
 		int b = (int)(Math.random()*(max-min+1)+min);  
-		return "TYPEID"+String.valueOf(b);
+		return "COMPANYID"+String.valueOf(b);
 		
 	}
 }

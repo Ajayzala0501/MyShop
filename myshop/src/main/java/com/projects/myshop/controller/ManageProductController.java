@@ -1,5 +1,6 @@
 package com.projects.myshop.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import com.projects.myshop.Service.ManageProductService;
 import com.projects.myshop.config.InfoClass;
 import com.projects.myshop.config.ResponseMessageClass;
 import com.projects.myshop.enitity.OrganizationEntity;
+import com.projects.myshop.enitity.ProductCompanyEntity;
 import com.projects.myshop.enitity.ProductDetailsEntity;
 import com.projects.myshop.enitity.ProductTypesEntity;
 import com.projects.myshop.enitity.Registration;
@@ -33,11 +35,11 @@ public class ManageProductController {
 	ManageProductService manageProductService;
 	
 	@PostMapping("/addNewProductTypes")
-	public ResponseEntity<ResponseMessageClass<Object>>addNewProductTypes(@RequestBody String typeName, HttpServletRequest request){
+	public ResponseEntity<ResponseMessageClass<Object>>addNewProductTypes(@RequestBody ProductTypesEntity productTypesEntity, HttpServletRequest request){
 
 		Registration re = InfoClass.getCurrentUser(request);	
 		if(re != null) {	
-			ProductTypesEntity pdtype = manageProductService.addNewProductTypes(typeName);
+			ProductTypesEntity pdtype = manageProductService.addNewProductTypes(productTypesEntity.getTypeName(),re);
 			if(pdtype != null) {
 				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Type Added Successfully",HttpStatus.OK,"success"));
 
@@ -48,6 +50,23 @@ public class ManageProductController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
+	
+	@PostMapping("/addNewProductCompany")
+	public ResponseEntity<ResponseMessageClass<Object>>addNewProductCompany(@RequestBody ProductCompanyEntity productCompanyEntity, HttpServletRequest request){
+
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {	
+			ProductCompanyEntity pdCompany = manageProductService.addNewProductCompany(productCompanyEntity.getCompanyName(),re);
+			if(pdCompany != null) {
+				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Company Added Successfully",HttpStatus.OK,"success"));
+
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new ResponseMessageClass<Object>("New Company Not Added, Please Try Again!!",HttpStatus.NOT_MODIFIED,"warning"));
+			}
+		}else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
+		}
+	}	
 	
 	@PostMapping("/addNewProduct")
 	public ResponseEntity<ResponseMessageClass<Object>>addNewProduct(@RequestBody ProductDetailsModel detailsModel, HttpServletRequest request){
@@ -77,6 +96,18 @@ public class ManageProductController {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Product Not Exits",HttpStatus.BAD_REQUEST,"warning"));
 			}
 		}else {		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
+		}
+	}
+	@GetMapping("/getAllProductTypes")
+	public ResponseEntity<ResponseMessageClass<Object>> getAllProductTypes(HttpServletRequest request){
+		
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {	
+			List<ProductTypesEntity> getTypeList = manageProductService.getAllProductTypes(re);
+			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(getTypeList, HttpStatus.OK, "success"));
+		}
+		else {		
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}

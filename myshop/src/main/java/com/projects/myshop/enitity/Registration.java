@@ -4,12 +4,14 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -41,6 +43,10 @@ public class Registration {
 	private String token;
 	
 	private Date tokenExpirationTime;
+	
+	@OneToOne(mappedBy = "registration", fetch = FetchType.LAZY)
+	@Transient
+	private ProductTypesEntity entity;
 	
 	public long getId() {
 		return id;
