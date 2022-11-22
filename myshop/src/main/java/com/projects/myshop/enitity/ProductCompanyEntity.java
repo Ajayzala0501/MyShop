@@ -21,21 +21,14 @@ public class ProductCompanyEntity {
 	
 	private String companyName;
 	
+	private String productTypeId;
+	
 	private Date createdDate;
 	
 	private Date updtaedDate;
 	
-	@OneToOne
-	@JoinColumn(name = "obj_ref_id",referencedColumnName = "orgid")
-	private Registration registration;
-
+	private String orgRefId;
 	
-	public Registration getRegistration() {
-		return registration;
-	}
-	public void setRegistration(Registration registration) {
-		this.registration = registration;
-	}
 	public ProductCompanyEntity() {
 		Date d = new Date();
 		setCreatedDate(d);
@@ -80,5 +73,17 @@ public class ProductCompanyEntity {
 		int b = (int)(Math.random()*(max-min+1)+min);  
 		return "COMPANYID"+String.valueOf(b);
 		
+	}
+	public String getOrgRefId() {
+		return orgRefId;
+	}
+	public void setOrgRefId(String orgRefId) {
+		this.orgRefId = orgRefId;
+	}
+	public String getProductTypeId() {
+		return productTypeId;
+	}
+	public void setProductTypeId(String productTypeId) {
+		this.productTypeId = productTypeId;
 	}
 }

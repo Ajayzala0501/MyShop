@@ -116,11 +116,15 @@
 								$("#error").addClass('alert-success');
 								$("#error p").html("Token is send to registered email, Please Check!!");
 
-							} else {
-								showMessage(data["result"], data["msgType"]);
+							}else{
+								$("#error").show();
+							$('#error').removeClass('alert-success');
+							$("#error").addClass('alert-danger');
+							$("#error p").html(data["result"]);
 							}
 						},
 						error: function (error) {
+							debugger
 							$("#error").show();
 							$('#error').removeClass('alert-success');
 							$("#error").addClass('alert-danger');

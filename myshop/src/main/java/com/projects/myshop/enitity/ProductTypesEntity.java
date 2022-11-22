@@ -1,5 +1,6 @@
 package com.projects.myshop.enitity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
@@ -32,24 +34,13 @@ public class ProductTypesEntity {
 	
 	private Date updtaedDate;
 
+	private String orgRefId;
+	
 	public ProductTypesEntity() {
 		Date d = new Date();
 		setCreatedDate(d);
 		setUpdtaedDate(d);
 		setTypeId(generateTypeCode());
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
-	@JoinColumn(name = "obj_ref_id",referencedColumnName = "orgid")
-	
-	private Registration registration;
-	
-	public Registration getRegistration() {
-		return registration;
-	}
-
-	public void setRegistration(Registration registration) {
-		this.registration = registration;
 	}
 	public String getTypeId() {
 		return typeId;
@@ -91,5 +82,12 @@ public class ProductTypesEntity {
 		return "TYPEID"+String.valueOf(b);
 		
 	}
+	public String getOrgRefId() {
+		return orgRefId;
+	}
+	public void setOrgRefId(String orgRefId) {
+		this.orgRefId = orgRefId;
+	}
+	
 	
 }

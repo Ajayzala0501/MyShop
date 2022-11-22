@@ -42,40 +42,24 @@
 						<form role="form" id="productInfoForm">
 							<div class="row">
 								<div class="col-sm-12">
-									<div id="error-for-product" style=" padding: 7px;" class="alert alert-danger">
-										<p>Erorrrr</p>
+									<div hidden id="error-for-product" style=" padding: 7px;"
+										class="alert alert-danger">
+										<p></p>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-6">
-									<div><label>Product Type</label>
-										<select class="select2_demo_3 form-control">
-											<option></option>
-											<option value="Bahamas">Bahamas</option>
-											<option value="Bahrain">Bahrain</option>
-											<option value="Bangladesh">Bangladesh</option>
-											<option value="Barbados">Barbados</option>
-											<option value="Belarus">Belarus</option>
-											<option value="Belgium">Belgium</option>
-											<option value="Belize">Belize</option>
-											<option value="Benin">Benin</option>
+									<div><label>Select Product Type</label>
+										<select id="productTypeSelectOption" name="productTypeSelectOption"
+											class="select2_demo_3 form-control">
 										</select>
-
 									</div>
 								</div>
 								<div class="col-sm-6">
-									<div class="form-group"><label>Product Company</label>
-										<select class="select2_demo_3 form-control">
-											<option></option>
-											<option value="Bahamas">Bahamas</option>
-											<option value="Bahrain">Bahrain</option>
-											<option value="Bangladesh">Bangladesh</option>
-											<option value="Barbados">Barbados</option>
-											<option value="Belarus">Belarus</option>
-											<option value="Belgium">Belgium</option>
-											<option value="Belize">Belize</option>
-											<option value="Benin">Benin</option>
+									<div class="form-group"><label> Select Product Company</label>
+										<select id="productCompanySelectOption" name="productCompanySelectOption"
+											class="select2_demo_3 form-control">
 										</select>
 									</div>
 								</div>
@@ -85,13 +69,13 @@
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Model</label>
 
-										<input type="text" class="form-control">
+										<input type="text" id="productModel" name="productModel" class="form-control">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Color</label>
 
-										<input type="color" class="form-control">
+										<input type="color" id="productColor" name="productColor" class="form-control">
 									</div>
 								</div>
 							</div>
@@ -99,7 +83,7 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<div><label>Product Size/Capacity</label>
-										<select class="select2_demo_3 form-control">
+										<select class="select2_demo_3 form-control" id="productSize" name="productSize">
 											<option></option>
 											<option value="Bahamas">Bahamas</option>
 											<option value="Bahrain">Bahrain</option>
@@ -115,7 +99,7 @@
 								</div>
 								<div class="col-sm-3">
 									<div class="form-group"><label>Product RAM</label>
-										<select class="select2_demo_3 form-control">
+										<select class="select2_demo_3 form-control" id="productRAM" name="productRAM">
 											<option></option>
 											<option value="Bahamas">Bahamas</option>
 											<option value="Bahrain">Bahrain</option>
@@ -130,7 +114,7 @@
 								</div>
 								<div class="col-sm-3">
 									<div class="form-group"><label>Product ROM</label>
-										<select class="select2_demo_3 form-control">
+										<select class="select2_demo_3 form-control" id="productROM" name="productROM">
 											<option></option>
 											<option value="Bahamas">Bahamas</option>
 											<option value="Bahrain">Bahrain</option>
@@ -144,8 +128,9 @@
 									</div>
 								</div>
 								<div class="col-sm-3">
-									<div class="form-group"><label>TV Type</label>
-										<select class="select2_demo_3 form-control">
+									<div class="form-group"><label>Product Type</label>
+										<select class="select2_demo_3 form-control" id="productTvType"
+											name="productTvType">
 											<option></option>
 											<option value="Bahamas">Bahamas</option>
 											<option value="Bahrain">Bahrain</option>
@@ -163,25 +148,27 @@
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Quntity</label>
 
-										<input class="touchspin1" type="text" value="" name="demo1">
+										<input class="touchspin1" type="text" min="1" name="productQuantity"
+											id="productQuantity">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Price</label>
 
-										<input type="number" class="form-control " min="1" step="any" />
+										<input type="number" class="form-control"  id="productPrice" name="productPrice"
+											min="1" step="any" />
 									</div>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-sm-1">
-									<button class="btn btn-sm btn-primary m-t-n-xs"
-										type="submit"><strong>Submit</strong></button>
+									<button class="btn btn-sm btn-primary m-t-n-xs" type="submit"><strong>Add Product
+											Information</strong></button>
 
 								</div>
-								<div class="col-1"></div>
-								<div class="col-sm-1">
+								<div class="col-sm-2"></div>
+								<div class="col-sm-5">
 									<button class="btn btn-sm btn-danger m-t-n-xs"
 										type="submit"><strong>Reset</strong></button>
 
@@ -215,7 +202,8 @@
 								<form role="form" id="productTypeForm">
 									<div class="row">
 										<div class="col-sm-12">
-											<div id="error-for-type" style=" padding: 7px;" hidden class="alert alert-danger">
+											<div id="error-for-type" style=" padding: 7px;" hidden
+												class="alert alert-danger">
 												<p></p>
 											</div>
 										</div>
@@ -224,7 +212,8 @@
 										<div class="col-sm-12">
 											<div class="form-group"><label>Product Type</label>
 
-												<input type="text" name="productTypeName" id="productTypeName" class="form-control">
+												<input type="text" name="productTypeName" id="productTypeName"
+													class="form-control">
 											</div>
 										</div>
 									</div>
@@ -265,17 +254,28 @@
 								<form role="form" id="productCompanyForm">
 									<div class="row">
 										<div class="col-sm-12">
-											<div id="error-for-company" hidden style=" padding: 7px;" class="alert alert-danger">
+											<div id="error-for-company" hidden style=" padding: 7px;"
+												class="alert alert-danger">
 												<p></p>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 
-										<div class="col-sm-12">
+										<div class="col-sm-6">
 											<div class="form-group"><label>Product Company</label>
 
-												<input type="text" name="productCompanyName" required id="productCompanyName" class="form-control">
+												<input type="text" name="productCompanyName" required
+													id="productCompanyName" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div><label>Select Product Type</label>
+												<select id="productTypeSelectOptionWithCompany"
+													name="productTypeSelectOptionWithCompany"
+													class="select2_demo_3 form-control">
+													<option></option>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -307,9 +307,9 @@
 	<script th:src="@{/js/plugins/select2/select2.full.min.js}"></script>
 	<!-- TouchSpin -->
 	<script th:src="@{/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js}"></script>
-	
+
 	<script th:src="@{/js/customjs/addNewProduct.js}"></script>
-	
+
 	<!-- Select2 -->
 </body>
 

@@ -20,8 +20,13 @@ public interface ManageProductService {
 
 	Optional<ProductDetailsEntity> getProductById(String prodID);
 
-	ProductCompanyEntity addNewProductCompany(String companyName,Registration re);
+	ProductCompanyEntity addNewProductCompany(ProductCompanyEntity companyEntity,Registration re);
 	
 	List<ProductTypesEntity> getAllProductTypes(Registration registration);
 	
+	List<ProductCompanyEntity> getAllProductCompany(String typeId,Registration registration);
+	
+	Optional<ProductTypesEntity> getProductTypesByName(String typeName,Registration registration);
+	
+	Optional<ProductCompanyEntity> getProductCompanyByName(ProductCompanyEntity companyEntity,Registration registration);
 }

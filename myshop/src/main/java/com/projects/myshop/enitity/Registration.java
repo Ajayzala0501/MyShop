@@ -1,5 +1,6 @@
 package com.projects.myshop.enitity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tbl_registration")
-public class Registration {
+public class Registration  {
 	
 	@Id
 	@SequenceGenerator(name = "tbl_registration_sequence",sequenceName = "tbl_registration_sequence",allocationSize = 1)
@@ -43,10 +44,6 @@ public class Registration {
 	private String token;
 	
 	private Date tokenExpirationTime;
-	
-	@OneToOne(mappedBy = "registration", fetch = FetchType.LAZY)
-	@Transient
-	private ProductTypesEntity entity;
 	
 	public long getId() {
 		return id;

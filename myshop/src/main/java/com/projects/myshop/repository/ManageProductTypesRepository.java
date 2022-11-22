@@ -10,6 +10,15 @@ import com.projects.myshop.enitity.ProductTypesEntity;
 @Repository
 public interface ManageProductTypesRepository extends JpaRepository<ProductTypesEntity, Long> {
 
+	/*
+	 * @Query( value =
+	 * "SELECT * FROM myshop_db.product_types_entity t where t.obj_ref_id = :id",
+	 * nativeQuery = true) List<ProductTypesEntity>
+	 * getProductTypeByUsername(@Param("id") Long id);
+	 */
+
+	List<ProductTypesEntity> findByOrgRefId(String userId);
 	
-	List<ProductTypesEntity> findByRegistrationOrgid(String userID);
+	Optional<ProductTypesEntity> findByTypeNameAndOrgRefId(String typeName,String userId);
 }
+ 
