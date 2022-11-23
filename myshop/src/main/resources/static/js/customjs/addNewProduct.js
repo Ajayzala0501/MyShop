@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	$(".select2_demo_3").select2({
 		placeholder: "Select a state",
@@ -9,26 +10,65 @@ $(document).ready(function() {
 		buttonup_class: 'btn btn-white'
 	});
 
+	$('.typeahead_1').typeahead({
+		source: ["RAM", "ROM", "INCH", "TV TYPE", "LITERS", "WATT", "REFRIGERATOR TYPES", "CATEGORY"]
+	});
+
+	$("#specification-table-hide-show").hide();
+	$("#btn-add-specification").click(function() {
+		$("#specification-table-hide-show").toggle(500);
+	});
+
+/*
+$("#MyTable").on("click", "#DeleteButton", function() {
+   $(this).closest("tr").remove();
+});*/
+
+	$("#tbl-body-specification-input").on('keydown', function() {
+		// Does some stuff and logs the event to the console
+		//$("#tbl-body-specification-input").closest('tr').find('#r').typeahead({
+			//source: ["RAM", "ROM", "INCH", "TV TYPE", "LITERS", "WATT", "REFRIGERATOR TYPES", "CATEGORY"]
+		//});
+		
+		var d = $("#tbl-body-specification-input").closest('tr');
+	//var a = $(this).attr("id");
+				
+		console.log("Print"+$("#tbl-body-specification-input").closest('tr').attr('id'));
+		
+		//$(this).attr("id").addClass('typeahead_1');
+	});
+	//add row dynamically into specification table.
+	$("#btn-add-row").click(function() {
+		var rowCount = $("#tbl-body-specification-input tr").length;
+		$('#tbl-body-specification-input').append(`<tr id="${++rowCount}">
+		<td id='${rowCount}' class='first'>${rowCount}</td>
+          	<td><input type="text" style="height:25px" class="typeahead_1 form-control">
+														</td>
+														<td><input type="text" style="height:25px" class="form-control">
+														</td>	<td class="text-navy"> <i class="fa fa-level-up"></i> 40% </td>
+           </tr>`);
+	});
+
 
 	// Defining the array for loading the information.
-	
+
 	// Array creating for product size
-	var productSizeArray = ["24 inches","32 inches","43 inches","55 inches","65 inches","75 inches","85 inches"];
+	var productSizeArray = ["24 inches", "32 inches", "43 inches", "55 inches", "65 inches", "75 inches", "85 inches"];
 
 	// Array creating for product capacity
-	var productCapacityArray = ["121-130 litres","240-350 litres","231-500 litres","500 litres"];
+	var productCapacityArray = ["121-130 litres", "240-350 litres", "231-500 litres", "500 litres"];
 
 	// Array creating for product ram
-	var productRAMArray = ["1 GB","2 GB","4 GB","6 GB","8 GB","12 GB","16 GB","32 GB"];
+	var productRAMArray = ["1 GB", "2 GB", "4 GB", "6 GB", "8 GB", "12 GB", "16 GB", "32 GB"];
 
 	// Array creating for product rom
-	var productROMArray = ["1 GB","2 GB","4 GB","8 GB","16 GB","32 GB","64 GB","128 GB","256 GB","512 GB","1 TB"];
+	var productROMArray = ["1 GB", "2 GB", "4 GB", "8 GB", "16 GB", "32 GB", "64 GB", "128 GB", "256 GB", "512 GB", "1 TB"];
 
 	// Array creating for tv type
-	var productTVTypeArray = ["LED","CURVED","OLED"];
-	
+	var productTVTypeArray = ["LED", "CURVED", "OLED"];
+
 	// Array creating for Refrigerator type
-	var productRefrigeratorTypeArray = ["Single Door","Double Door","Tripal Door","Side By Side"];
+	var productRefrigeratorTypeArray = ["Single Door", "Double Door", "Tripal Door", "Side By Side"];
 
 	//function Call
 	getAllProductTypes(true, "");
@@ -236,7 +276,7 @@ $(document).ready(function() {
 		}
 	}
 	$('#productTypeSelectOption').on('change', function(e) {
-	$('#productCompanySelectOption').val(null).trigger('change');
+		$('#productCompanySelectOption').val(null).trigger('change');
 		$("#productCompanySelectOption").find('option').remove();
 		getAllProductCompany(true, "");
 		loadDataBasedOnProductTypes($("#productTypeSelectOption").text());
@@ -255,18 +295,6 @@ $(document).ready(function() {
 				required: true
 			},
 			productColor: {
-				required: true
-			},
-			productSize: {
-				required: true
-			},
-			productRAM: {
-				required: true
-			},
-			productROM: {
-				required: true
-			},
-			productTvType: {
 				required: true
 			},
 			productQuantity: {
@@ -289,18 +317,6 @@ $(document).ready(function() {
 			},
 			productColor: {
 				required: "Please chooes the product color"
-			},
-			productSize: {
-				required: "Please select the product size"
-			},
-			productRAM: {
-				required: "Please select the product RAM"
-			},
-			productROM: {
-				required: "Please select the product ROM"
-			},
-			productTvType: {
-				required: "Please select the product TV Type"
 			},
 			productQuantity: {
 				required: "Please enter the product quantity ",
@@ -348,12 +364,12 @@ $(document).ready(function() {
 	});
 
 
-// Function defining for loading the data on product type change
+	// Function defining for loading the data on product type change
 
-function loadDataBasedOnProductTypes(productType){
-	
-	alert(productType);
-}
+	function loadDataBasedOnProductTypes(productType) {
+
+
+	}
 
 });
 
