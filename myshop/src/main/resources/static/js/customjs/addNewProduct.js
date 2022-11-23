@@ -19,34 +19,28 @@ $(document).ready(function() {
 		$("#specification-table-hide-show").toggle(500);
 	});
 
-/*
-$("#MyTable").on("click", "#DeleteButton", function() {
-   $(this).closest("tr").remove();
-});*/
+	
+	$("#tbl-specification-input").on("click", "#btn-delete", function() {
+	   $(this).closest("tr").remove();
+	});
 
 	$("#tbl-body-specification-input").on('keydown', function() {
-		// Does some stuff and logs the event to the console
-		//$("#tbl-body-specification-input").closest('tr').find('#r').typeahead({
-			//source: ["RAM", "ROM", "INCH", "TV TYPE", "LITERS", "WATT", "REFRIGERATOR TYPES", "CATEGORY"]
-		//});
-		
-		var d = $("#tbl-body-specification-input").closest('tr');
-	//var a = $(this).attr("id");
-				
-		console.log("Print"+$("#tbl-body-specification-input").closest('tr').attr('id'));
-		
-		//$(this).attr("id").addClass('typeahead_1');
+		$(".typeahead_1").typeahead({
+			source: ["RAM", "ROM", "INCH", "TV TYPE", "LITERS", "WATT", "REFRIGERATOR TYPES", "CATEGORY"]
+		});
 	});
-	//add row dynamically into specification table.
+
+
+
+
 	$("#btn-add-row").click(function() {
 		var rowCount = $("#tbl-body-specification-input tr").length;
-		$('#tbl-body-specification-input').append(`<tr id="${++rowCount}">
+		$('#tbl-body-specification-input').append(`<tr class='text-center' id="${++rowCount}">
 		<td id='${rowCount}' class='first'>${rowCount}</td>
-          	<td><input type="text" style="height:25px" class="typeahead_1 form-control">
-														</td>
-														<td><input type="text" style="height:25px" class="form-control">
-														</td>	<td class="text-navy"> <i class="fa fa-level-up"></i> 40% </td>
-           </tr>`);
+		<td><input type="text" style="height:25px" class="typeahead_1 form-control"></td>
+		<td><input type="text" style="height:25px" class="form-control"></td>
+		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="fa fa-trash-o fa-lg"></i></a></td>											
+        </tr>`);
 	});
 
 
