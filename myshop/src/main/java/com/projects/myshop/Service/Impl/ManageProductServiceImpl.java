@@ -11,7 +11,7 @@ import com.projects.myshop.Service.ManageProductService;
 import com.projects.myshop.enitity.ProductCompanyEntity;
 import com.projects.myshop.enitity.ProductDetailsEntity;
 import com.projects.myshop.enitity.ProductTypesEntity;
-import com.projects.myshop.enitity.ProductsEntity;
+
 import com.projects.myshop.enitity.Registration;
 import com.projects.myshop.model.ProductDetailsModel;
 import com.projects.myshop.repository.ManageProductCompanyRepository;
@@ -51,19 +51,16 @@ public class ManageProductServiceImpl implements ManageProductService {
 	}
 
 	@Override
-	public ProductDetailsEntity addNewProduct(ProductDetailsModel detailsModel, Registration re) {
-		ProductsEntity p = new ProductsEntity();
-		p.setRegistration(re);
+	public ProductDetailsEntity addNewProduct(ProductDetailsEntity detailsModel, Registration re) {
+
 		ProductDetailsEntity pdDetails = new ProductDetailsEntity();
 
-		pdDetails.setProductsEntity(p);
 		pdDetails.setTypeId(detailsModel.getTypeId());
-		pdDetails.setProductCompany(detailsModel.getProductCompany());
+		pdDetails.setCompanyId(detailsModel.getCompanyId());
+		pdDetails.setUserId(re.getOrgid());
+		pdDetails.setProductSpecification(detailsModel.getProductSpecification());
 		pdDetails.setProductModel(detailsModel.getProductModel());
 		pdDetails.setProductColour(detailsModel.getProductColour());
-		pdDetails.setSize(detailsModel.getSize());
-		pdDetails.setRam(detailsModel.getRam());
-		pdDetails.setRom(detailsModel.getRom());
 		pdDetails.setProductQuantity(detailsModel.getProductQuantity());
 		pdDetails.setProductPrice(detailsModel.getProductPrice());
 		return detailsRepository.save(pdDetails);
@@ -101,6 +98,11 @@ public class ManageProductServiceImpl implements ManageProductService {
 		return companyRepository.findByCompanyNameAndOrgRefIdAndProductTypeId(
 				companyEntity.getCompanyName().toUpperCase(), registration.getOrgid(),
 				companyEntity.getProductTypeId());
+	}
+
+	@Override
+	public List<ProductDetailsEntity> getAllProducts(Registration registration) {
+		return detailsRepository.findAllProductByUserId(registration.getOrgid());
 	}
 
 }

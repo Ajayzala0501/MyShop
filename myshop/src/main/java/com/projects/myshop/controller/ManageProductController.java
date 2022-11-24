@@ -83,10 +83,10 @@ public class ManageProductController {
 	}	
 	
 	@PostMapping("/addNewProduct")
-	public ResponseEntity<ResponseMessageClass<Object>>addNewProduct(@RequestBody ProductDetailsModel detailsModel, HttpServletRequest request){
+	public ResponseEntity<ResponseMessageClass<Object>>addNewProduct(@RequestBody ProductDetailsEntity  detailsEntity, HttpServletRequest request){
 		Registration re = InfoClass.getCurrentUser(request);	
 		if(re != null) {	
-			ProductDetailsEntity pdDetails = manageProductService.addNewProduct(detailsModel,re);
+			ProductDetailsEntity pdDetails = manageProductService.addNewProduct(detailsEntity,re);
 			if(pdDetails != null) {
 				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("New Product Added Successfully",HttpStatus.OK,"success"));
 
@@ -133,6 +133,18 @@ public class ManageProductController {
 			String typeId = request.getParameter("typeId");
 			List<ProductCompanyEntity> getCompanyList = manageProductService.getAllProductCompany(typeId,re);
 			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(getCompanyList, HttpStatus.OK, "success"));
+		}
+		else {		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
+		}
+	}
+	
+	@GetMapping("/getAllProductInfo")
+	public ResponseEntity<ResponseMessageClass<Object>> getAllProductInfo(HttpServletRequest request){	
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {
+			List<ProductDetailsEntity> pdDetails = manageProductService.getAllProducts(re);
+			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(pdDetails, HttpStatus.OK, "success"));
 		}
 		else {		
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));

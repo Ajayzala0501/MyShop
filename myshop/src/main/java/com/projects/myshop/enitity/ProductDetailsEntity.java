@@ -3,12 +3,14 @@ package com.projects.myshop.enitity;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -19,24 +21,21 @@ public class ProductDetailsEntity {
 	@SequenceGenerator(name = "ProductDetails_Sequence", sequenceName = "ProductDetails_Sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ProductDetails_Sequence")
 	private long id;
+
+	private String prodId;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "prod_ref_id",referencedColumnName = "prodId")
-	private ProductsEntity productsEntity;
+	private String userId;
 	
 	private String typeId;
 	
-	private String productCompany;
+	private String companyId;
 	
 	private String productModel;
 	
 	private String productColour;
-	
-	private String size;
-	
-	private int ram;
-	
-	private int rom;
+	@Lob 
+	@Column(name="productSpecification", length=2000)
+	private String productSpecification;
 	
 	private int productQuantity;
 	
@@ -46,24 +45,58 @@ public class ProductDetailsEntity {
 	
 	private Date updatedDate;
 	
-	
 	public ProductDetailsEntity() {
 		// TODO Auto-generated constructor stub
 		Date d = new Date();
 		setCreatedDate(d);
 		setUpdatedDate(d);
-	
+		setProdId(generateProductCode());
+	}
+	public String generateProductCode(){
+		int min = 1000;  
+		int max = 9999;
+		int b = (int)(Math.random()*(max-min+1)+min);  
+		return "PRODID"+String.valueOf(b);		
+	}
+	public long getId() {
+		return id;
 	}
 
-
-	public ProductsEntity getProductsEntity() {
-		return productsEntity;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public void setProductsEntity(ProductsEntity productsEntity) {
-		this.productsEntity = productsEntity;
+	public String getProdId() {
+		return prodId;
 	}
 
+	public void setProdId(String prodId) {
+		this.prodId = prodId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getProductSpecification() {
+		return productSpecification;
+	}
+
+	public void setProductSpecification(String productSpecification) {
+		this.productSpecification = productSpecification;
+	}
 
 	public String getTypeId() {
 		return typeId;
@@ -74,15 +107,6 @@ public class ProductDetailsEntity {
 		this.typeId = typeId;
 	}
 
-
-	public String getProductCompany() {
-		return productCompany;
-	}
-
-
-	public void setProductCompany(String productCompany) {
-		this.productCompany = productCompany;
-	}
 
 
 	public String getProductModel() {
@@ -105,35 +129,7 @@ public class ProductDetailsEntity {
 	}
 
 
-	public String getSize() {
-		return size;
-	}
-
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-
-	public int getRam() {
-		return ram;
-	}
-
-
-	public void setRam(int ram) {
-		this.ram = ram;
-	}
-
-
-	public int getRom() {
-		return rom;
-	}
-
-
-	public void setRom(int rom) {
-		this.rom = rom;
-	}
-
+	
 
 	public int getProductQuantity() {
 		return productQuantity;

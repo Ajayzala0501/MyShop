@@ -11,12 +11,10 @@
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
     
+    <!-- Cusmtome style -->
   	<th:block th:replace="${link}" />
 
-
-    
-    
-      <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet">
     
     <!-- Toastr style -->
     <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
@@ -68,6 +66,7 @@
                      <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Manage Product</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
+                    <li><a th:href="@{/ViewProduct/searchProductPage}">Search Product</a></li>
                         <li><a th:href="@{/ViewProduct/addNewProductPage}">Add New Product</a></li>
                         <li><a href="dashboard_2.html">Dashboard v.2</a></li>
                         <li><a href="dashboard_3.html">Dashboard v.3</a></li>
@@ -253,6 +252,9 @@
     <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
     <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
 
+
+	<th:block th:replace="${script}" />
+
     <!-- Custom and plugin javascript -->
     <script th:src="@{/js/inspinia.js}"></script>
     <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
@@ -261,7 +263,7 @@
 	<script th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
     <!-- jQuery UI -->
     <script th:src="@{/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
-    <th:block th:replace="${script}" />
+    
 
 
 </body>

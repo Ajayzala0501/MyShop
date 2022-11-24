@@ -11,4 +11,8 @@ public class ProductViewPageController {
 	public String addNewProduct() {
 		return "addNewProductPage";
 	}
+	@GetMapping("/searchProductPage")
+	public String searchProductPage() {
+		return "searchProductPage";
+	}
 }

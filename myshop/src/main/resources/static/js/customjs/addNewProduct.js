@@ -19,11 +19,18 @@ $(document).ready(function() {
 		$("#specification-table-hide-show").toggle(500);
 	});
 
+	/*
+	//Function Uses Name That Color
 	
-	$("#tbl-specification-input").on("click", "#btn-delete", function() {
-	   $(this).closest("tr").remove();
-	});
-
+	let result = ntc.name('#6195ed');
+	
+	let rgb_value = result[0];      // #6495ed         : RGB value of closest match
+	let specific_name = result[1];  // Cornflower Blue : Color name of closest match
+	let shade_value = result[2];    // #0000ff         : RGB value of shade of closest match
+	let shade_name = result[3];     // Blue            : Color name of shade of closest match
+	let is_exact_match = result[4]; // false           : True if exact color match
+	
+	*/
 	$("#tbl-body-specification-input").on('keydown', function() {
 		$(".typeahead_1").typeahead({
 			source: ["RAM", "ROM", "INCH", "TV TYPE", "LITERS", "WATT", "REFRIGERATOR TYPES", "CATEGORY"]
@@ -35,10 +42,10 @@ $(document).ready(function() {
 
 	$("#btn-add-row").click(function() {
 		var rowCount = $("#tbl-body-specification-input tr").length;
-		$('#tbl-body-specification-input').append(`<tr class='text-center' id="${++rowCount}">
+		$('#tbl-body-specification-input').append(`<tr class='text-center'class="main-tr" id="${++rowCount}">
 		<td id='${rowCount}' class='first'>${rowCount}</td>
-		<td><input type="text" style="height:25px" class="typeahead_1 form-control"></td>
-		<td><input type="text" style="height:25px" class="form-control"></td>
+		<td><input type="text" style="height:25px" id="spec-input" name="spec-input" class="spec-input typeahead_1 form-control"></td>
+		<td><input type="text" style="height:25px" id="spec-value" name="spec-value" class="spec-input form-control"></td>
 		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="fa fa-trash-o fa-lg"></i></a></td>											
         </tr>`);
 	});
@@ -229,7 +236,7 @@ $(document).ready(function() {
 
 	//For load all the product company from database
 	function getAllProductCompany(checkAlreadyNotPresentData, OptionData) {
-		debugger;
+
 		if (checkAlreadyNotPresentData) {
 			$.ajax({
 				type: "GET",
@@ -246,7 +253,7 @@ $(document).ready(function() {
 							opData += "<option value='" + item['companyId'] + "'>" + item['companyName'] + "</option>";
 							//alert(item['id']+" "+item['name']+" "+item['department']+" "+item['sem']);
 						});
-						debugger
+
 						$("#productCompanySelectOption").append(opData);
 						$("#productCompanySelectOption").select2().trigger('change');
 						opData = '';
@@ -273,9 +280,13 @@ $(document).ready(function() {
 		$('#productCompanySelectOption').val(null).trigger('change');
 		$("#productCompanySelectOption").find('option').remove();
 		getAllProductCompany(true, "");
-		loadDataBasedOnProductTypes($("#productTypeSelectOption").text());
 	});
-
+	
+	$("#productColor").change(function(event){
+		let result = ntc.name(event.target.value);
+		$("#productColorName").val(result[1]);			
+	});
+	
 	// For add new product information.	
 	$("#productInfoForm").validate({
 		rules: {
@@ -288,7 +299,7 @@ $(document).ready(function() {
 			productModel: {
 				required: true
 			},
-			productColor: {
+			productColorName: {
 				required: true
 			},
 			productQuantity: {
@@ -309,7 +320,7 @@ $(document).ready(function() {
 			productModel: {
 				required: "Please enter the product model"
 			},
-			productColor: {
+			productColorName: {
 				required: "Please chooes the product color"
 			},
 			productQuantity: {
@@ -322,30 +333,40 @@ $(document).ready(function() {
 			}
 		},
 		submitHandler: function(form, e) {
-			$("#productTvType").html('');
+		var JSONdata=createJSON();
 			e.preventDefault();
+			debugger
 			var Formdata = {
-				//email: $("#email").val()
+			 typeId:$("#productTypeSelectOption").val(),
+			 companyId:$("#productCompanySelectOption").val(),
+			 productModel:$("#productModel").val(),
+			 productColour:$("#productColorName").val(),
+			 productQuantity:$("#productQuantity").val(),
+			 productPrice:$("#productPrice").val(),
+			 productSpecification:JSONdata			
 			}
+			
 			$("#error-for-product").show();
 			$('#error-for-product').removeClass('alert-danger');
-			$("#").addClass('alert-success');
-			$("#error-for-product p").html("Please wait.. while generating token!!!");
+			$("#error-for-product").addClass('alert-success');
+			$("#error-for-product p").html("Please wait.. !!!");
+			debugger
 			$.ajax({
 				type: "POST",
 				contentType: "application/json",
 				data: JSON.stringify(Formdata),
+				url: "/Product/addNewProduct",
 				dataType: 'json',
 				success: function(data) {
-					/** 
+					
 					if (data["status"] == "OK") {
 						$("#error-for-product").show();
 						$('#error-for-product').removeClass('alert-danger');
 						$("#error-for-product").addClass('alert-success');
-						$("#error-for-product p").html("Token is send to registered email, Please Check!!");
-						$("#submit").hide();
-					}*/
-					alert("done");
+						$("#error-for-product p").html(data["result"]);	
+						$("#productInfoForm").trigger("reset");		
+					}
+					
 				},
 				error: function(error) {
 					$("#error-for-product").show();
@@ -358,13 +379,38 @@ $(document).ready(function() {
 	});
 
 
-	// Function defining for loading the data on product type change
+	function createJSON() {
+		jsonObj = [];
 
-	function loadDataBasedOnProductTypes(productType) {
+		$("#tbl-body-specification-input tr").each(function() {
+			var id = $(this).find("td:nth-child(1)").html();
+			var spec = $(this).find("td:nth-child(2) input[name=spec-input]").val();
+			var specvalue = $(this).find("td:nth-child(3) input[name=spec-value]").val();
 
+			item = {}
+			item["id"] = id;
+			item["specification"] = spec;
+			item["specification-value"] = specvalue;
 
+			jsonObj.push(item);
+
+		});
+	 return	JSON.stringify(jsonObj);
+		
 	}
 
+	function setRowCount() {
+		$("#tbl-body-specification-input tr").each(function(i, v) {
+			$(this).attr("id", i + 1);
+			$(this).find("td:nth-child(1)").text(i + 1);
+			$(this).find("td:nth-child(1)").attr("id", i + 1);
+		});
+	}
+
+	$("#tbl-specification-input").on("click", "#btn-delete", function() {
+		$(this).closest("tr").remove();
+		setRowCount();
+	});
 });
 
 

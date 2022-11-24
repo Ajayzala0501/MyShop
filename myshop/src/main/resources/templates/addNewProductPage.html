@@ -72,9 +72,16 @@
 										<input type="text" id="productModel" name="productModel" class="form-control">
 									</div>
 								</div>
-								<div class="col-sm-6">
+								<div class="col-sm-3">
+
 									<div class="form-group"><label>Product Color</label>
 
+										<input type="text" id="productColorName" name="productColorName"
+											class="form-control">
+									</div>
+								</div>
+								<div class="col-sm-3" style=" margin-top: 22px;">
+									<div class="form-group">
 										<input type="color" id="productColor" name="productColor" class="form-control">
 									</div>
 								</div>
@@ -103,7 +110,7 @@
 										</div>
 										<div class="ibox-content">
 
-											<table class="table table-hover" id="tbl-specification-input">
+											<table class="table table-hover"id="tbl-specification-input">
 												<thead>
 													<tr class="text-center">
 														<th>#</th>
@@ -113,13 +120,18 @@
 													</tr>
 												</thead>
 												<tbody id="tbl-body-specification-input">
-													<tr class="text-center">
-														<td  id='first'>1</td>
-														<td><input type="text" style="height:25px" class="typeahead_1 form-control">
+													<tr class="text-center main-tr">
+														<td id='first'>1</td>
+														<td><input type="text" style="height:25px" id="spec-input"
+																name="spec-input"
+																class="spec-input typeahead_1 form-control">
 														</td>
-														<td><input type="text" style="height:25px" class="form-control">
+														<td><input type="text" style="height:25px" id="spec-value"
+																name="spec-value" class="spec-value form-control">
 														</td>
-														<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="fa fa-trash-o fa-lg"></i></a></td>
+														<td class="text-navy text-center"> <a href="#"><i
+																	style='color:red;' id='btn-delete'
+																	class="fa fa-trash-o fa-lg"></i></a></td>
 													</tr>
 
 												</tbody>
@@ -300,11 +312,11 @@
 	<script th:src="@{/js/plugins/select2/select2.full.min.js}"></script>
 	<!-- TouchSpin -->
 	<script th:src="@{/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js}"></script>
-   <script th:src="@{/js/plugins/typehead/bootstrap3-typeahead.min.js}"></script>
+	<script th:src="@{/js/plugins/typehead/bootstrap3-typeahead.min.js}"></script>
 	<script th:src="@{/js/customjs/addNewProduct.js}"></script>
+	<script th:src="@{/js/customjs/colorName.js}"></script>
+	<!-- Typehead -->
 
-  <!-- Typehead -->
- 
 
 	<!-- Select2 -->
 </body>
