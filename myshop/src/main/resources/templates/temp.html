@@ -39,11 +39,7 @@
 						</div>
 					</div>
 					<div class="ibox-content">
-						<form role="form" id="productInfoForm" th:object="${PdDetails}">
-							<p hidden id="urlTag"
-								th:text="${PdDetails.productModel} != null ? @{/Product/updateProductDetails/{id}(id=${PdDetails.prodId})}:@{/Product/addNewProduct}">
-								URL</p>
-							<p hidden id="prodSpecification" th:text="${PdDetails.productSpecification}">Change</p>
+						<form role="form" id="productInfoForm">
 							<div class="row">
 								<div class="col-sm-12">
 									<div hidden id="error-for-product" style=" padding: 7px;"
@@ -55,15 +51,15 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div><label>Select Product Type</label>
-										<select id="productTypeSelectOption" th:field="*{typeId}"
-											name="productTypeSelectOption" class="select2_demo_3 form-control">
+										<select id="productTypeSelectOption" name="productTypeSelectOption"
+											class="select2_demo_3 form-control">
 										</select>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group"><label> Select Product Company</label>
-										<select id="productCompanySelectOption" th:field="*{companyId}"
-											name="productCompanySelectOption" class="select2_demo_3 form-control">
+										<select id="productCompanySelectOption" name="productCompanySelectOption"
+											class="select2_demo_3 form-control">
 										</select>
 									</div>
 								</div>
@@ -73,16 +69,15 @@
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Model</label>
 
-										<input type="text" id="productModel" th:field="*{productModel}"
-											name="productModel" class="form-control">
+										<input type="text" id="productModel" name="productModel" class="form-control">
 									</div>
 								</div>
 								<div class="col-sm-3">
 
 									<div class="form-group"><label>Product Color</label>
 
-										<input type="text" id="productColorName" th:field="*{productColour}"
-											name="productColorName" class="form-control">
+										<input type="text" id="productColorName" name="productColorName"
+											class="form-control">
 									</div>
 								</div>
 								<div class="col-sm-3" style=" margin-top: 22px;">
@@ -115,7 +110,7 @@
 										</div>
 										<div class="ibox-content">
 
-											<table class="table table-hover" id="tbl-specification-input">
+											<table class="table table-hover"id="tbl-specification-input">
 												<thead>
 													<tr class="text-center">
 														<th>#</th>
@@ -125,7 +120,7 @@
 													</tr>
 												</thead>
 												<tbody id="tbl-body-specification-input">
-													<tr class="text-center main-tr" id="hideWhenUpdate">
+													<tr class="text-center main-tr">
 														<td id='first'>1</td>
 														<td><input type="text" style="height:25px" id="spec-input"
 																name="spec-input"
@@ -158,15 +153,15 @@
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Quntity</label>
 
-										<input class="touchspin1" type="text" min="1" th:field="*{productQuantity}"
-											name="productQuantity" id="productQuantity">
+										<input class="touchspin1" type="text" min="1" name="productQuantity"
+											id="productQuantity">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group"><label>Product Price</label>
 
-										<input type="number" class="form-control" id="productPrice"
-											th:field="*{productPrice}" name="productPrice" min="1" step="any" />
+										<input type="number" class="form-control" id="productPrice" name="productPrice"
+											min="1" step="any" />
 									</div>
 								</div>
 							</div>
@@ -239,10 +234,12 @@
 										<div class="col-sm-1">
 											<button class="btn btn-sm btn-danger m-t-n-xs"
 												type="submit"><strong>Reset</strong></button>
+
 										</div>
 									</div>
 								</form>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -299,10 +296,12 @@
 										<div class="col-sm-1">
 											<button class="btn btn-sm btn-danger m-t-n-xs"
 												type="submit"><strong>Reset</strong></button>
+
 										</div>
 									</div>
 								</form>
 							</div>
+
 						</div>
 					</div>
 				</div>

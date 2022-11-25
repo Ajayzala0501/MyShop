@@ -1,5 +1,6 @@
 package com.projects.myshop.Service.Impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,4 +106,23 @@ public class ManageProductServiceImpl implements ManageProductService {
 		return detailsRepository.findAllProductByUserId(registration.getOrgid());
 	}
 
+	@Override
+	public ProductDetailsEntity getProductByIdAndUserId(Registration registration, String prodId) {
+		// TODO Auto-generated method stub
+		return detailsRepository.findProductByUserIdAndProdId(registration.getOrgid(), prodId);
+	}
+
+	@Override
+	public ProductDetailsEntity updateProductDetails(Registration registration, String prodId, ProductDetailsEntity newDetailsEntity) {
+		// TODO Auto-generated method stub
+		ProductDetailsEntity detailsEntity = detailsRepository.findByUserIdAndProdId(registration.getOrgid(),prodId);
+		detailsEntity.setTypeId(newDetailsEntity.getTypeId());
+		detailsEntity.setCompanyId(newDetailsEntity.getCompanyId());
+		detailsEntity.setProductModel(newDetailsEntity.getProductModel());
+		detailsEntity.setProductColour(newDetailsEntity.getProductColour());
+		detailsEntity.setProductSpecification(newDetailsEntity.getProductSpecification());
+		detailsEntity.setProductPrice(newDetailsEntity.getProductPrice());
+		detailsEntity.setUpdatedDate(new Date());
+		return detailsRepository.save(detailsEntity);
+	}
 }

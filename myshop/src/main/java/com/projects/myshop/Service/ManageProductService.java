@@ -31,4 +31,8 @@ public interface ManageProductService {
 	Optional<ProductCompanyEntity> getProductCompanyByName(ProductCompanyEntity companyEntity,Registration registration);
 	
 	List<ProductDetailsEntity> getAllProducts(Registration registration);
+	
+	ProductDetailsEntity getProductByIdAndUserId(Registration registration, String prodId);
+	
+	ProductDetailsEntity updateProductDetails(Registration registration, String prodId, ProductDetailsEntity newDetailsEntity);
 }

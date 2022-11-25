@@ -150,4 +150,27 @@ public class ManageProductController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
+	
+	
+	@PostMapping("/updateProductDetails/{id}")
+	public ResponseEntity<ResponseMessageClass<Object>> updateProductDetails(HttpServletRequest request, @PathVariable("id") String prodId, @RequestBody ProductDetailsEntity detailsEntity){
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {
+			ProductDetailsEntity pdDetails = manageProductService.updateProductDetails(re,prodId,detailsEntity);
+			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>("Product Update Successfull", HttpStatus.OK, "success"));
+		}
+		else {		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
+		}
+		
+	}
+	
+	public ProductDetailsEntity getProductByIdAndUserName(String prodId, HttpServletRequest request) {
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {
+			ProductDetailsEntity pdDetails = manageProductService.getProductByIdAndUserId(re,prodId);
+			return pdDetails;
+		}
+		return null;
+	}
 }

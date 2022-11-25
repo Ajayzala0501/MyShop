@@ -19,6 +19,29 @@ $(document).ready(function() {
 		$("#specification-table-hide-show").toggle(500);
 	});
 
+
+	if($("#prodSpecification").html()!= ''){
+		$("#hideWhenUpdate").hide();
+		var data = JSON.parse($("#prodSpecification").html());
+		
+		var tblRaw = '';
+		$(data).each(function(i){
+		tblRaw +=`<tr class='text-center'class="main-tr" id="${++i}">
+		<td id='${i}' class='first'>${i}</td>
+		<td><input type="text" style="height:25px" id="spec-input" name="spec-input" value='${data[i-1]["specification"]}' class="spec-input typeahead_1 form-control"></td>
+		<td><input type="text" style="height:25px" id="spec-value" name="spec-value" value='${data[i-1]["specification-value"]}' class="spec-input form-control"></td>
+		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="fa fa-trash-o fa-lg"></i></a></td>											
+        </tr>`	
+					
+		});
+		$('#tbl-body-specification-input').append(tblRaw);
+		}
+		else{
+			$("#hideWhenUpdate").show();
+		
+	}
+	
+
 	/*
 	//Function Uses Name That Color
 	
@@ -333,6 +356,7 @@ $(document).ready(function() {
 			}
 		},
 		submitHandler: function(form, e) {
+			   var url = $("#urlTag").html();
 		var JSONdata=createJSON();
 			e.preventDefault();
 			debugger
@@ -355,7 +379,7 @@ $(document).ready(function() {
 				type: "POST",
 				contentType: "application/json",
 				data: JSON.stringify(Formdata),
-				url: "/Product/addNewProduct",
+				url: url,
 				dataType: 'json',
 				success: function(data) {
 					
