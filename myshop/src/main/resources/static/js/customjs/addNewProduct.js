@@ -21,7 +21,12 @@ $(document).ready(function() {
 
 
 	if($("#prodSpecification").html()!= ''){
-		$("#hideWhenUpdate").hide();
+		$("#add-quantity-div").hide();
+		$("#update-header-1").html("Update Product");
+		$("#update-header-2").html("Update Product");
+		$("#update-header-3").html("Update Existing Product Information");
+		$("#update-btn-text").html("Update Product Information");
+		$("#specification-table-hide-show").show();
 		var data = JSON.parse($("#prodSpecification").html());
 		
 		var tblRaw = '';
@@ -30,14 +35,18 @@ $(document).ready(function() {
 		<td id='${i}' class='first'>${i}</td>
 		<td><input type="text" style="height:25px" id="spec-input" name="spec-input" value='${data[i-1]["specification"]}' class="spec-input typeahead_1 form-control"></td>
 		<td><input type="text" style="height:25px" id="spec-value" name="spec-value" value='${data[i-1]["specification-value"]}' class="spec-input form-control"></td>
-		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="fa fa-trash-o fa-lg"></i></a></td>											
+		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="btn-delete fa fa-trash-o fa-lg"></i></a></td>											
         </tr>`	
 					
 		});
 		$('#tbl-body-specification-input').append(tblRaw);
 		}
 		else{
-			$("#hideWhenUpdate").show();
+		$("#update-header-1").html("Add New Product");
+		$("#update-header-2").html("Add New Product");
+		$("#update-header-3").html("Add New Product Information");
+		$("#update-btn-text").html("Add Product Information");
+			$("#add-quantity-div").show();
 		
 	}
 	
@@ -69,7 +78,7 @@ $(document).ready(function() {
 		<td id='${rowCount}' class='first'>${rowCount}</td>
 		<td><input type="text" style="height:25px" id="spec-input" name="spec-input" class="spec-input typeahead_1 form-control"></td>
 		<td><input type="text" style="height:25px" id="spec-value" name="spec-value" class="spec-input form-control"></td>
-		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="fa fa-trash-o fa-lg"></i></a></td>											
+		<td class="text-navy text-center"> <a href="#"><i style='color:red;' id='btn-delete' class="btn-delete fa fa-trash-o fa-lg"></i></a></td>											
         </tr>`);
 	});
 
@@ -291,7 +300,6 @@ $(document).ready(function() {
 					$("#error-for-company").show();
 					$('#error-for-company').removeClass('alert-success');
 					$("#error-for-company").addClass('alert-danger');
-
 				}
 			})
 		} else {
@@ -356,7 +364,7 @@ $(document).ready(function() {
 			}
 		},
 		submitHandler: function(form, e) {
-			   var url = $("#urlTag").html();
+		var url = $("#urlTag").html();
 		var JSONdata=createJSON();
 			e.preventDefault();
 			debugger
@@ -381,8 +389,7 @@ $(document).ready(function() {
 				data: JSON.stringify(Formdata),
 				url: url,
 				dataType: 'json',
-				success: function(data) {
-					
+				success: function(data) {				
 					if (data["status"] == "OK") {
 						$("#error-for-product").show();
 						$('#error-for-product').removeClass('alert-danger');
@@ -405,24 +412,18 @@ $(document).ready(function() {
 
 	function createJSON() {
 		jsonObj = [];
-
 		$("#tbl-body-specification-input tr").each(function() {
 			var id = $(this).find("td:nth-child(1)").html();
 			var spec = $(this).find("td:nth-child(2) input[name=spec-input]").val();
 			var specvalue = $(this).find("td:nth-child(3) input[name=spec-value]").val();
-
 			item = {}
 			item["id"] = id;
 			item["specification"] = spec;
 			item["specification-value"] = specvalue;
-
 			jsonObj.push(item);
-
 		});
-	 return	JSON.stringify(jsonObj);
-		
+	 return	JSON.stringify(jsonObj);		
 	}
-
 	function setRowCount() {
 		$("#tbl-body-specification-input tr").each(function(i, v) {
 			$(this).attr("id", i + 1);
@@ -430,8 +431,7 @@ $(document).ready(function() {
 			$(this).find("td:nth-child(1)").attr("id", i + 1);
 		});
 	}
-
-	$("#tbl-specification-input").on("click", "#btn-delete", function() {
+	$("#tbl-specification-input").on("click", ".btn-delete", function() {
 		$(this).closest("tr").remove();
 		setRowCount();
 	});

@@ -16,7 +16,7 @@ public interface ManageProductService {
 
 	ProductTypesEntity addNewProductTypes(String typeName,Registration re);
 
-	ProductDetailsEntity addNewProduct(ProductDetailsEntity detailsModel,Registration re);
+	ProductDetailsEntity addNewProduct(ProductDetailsModel detailsModel,Registration re);
 
 	Optional<ProductDetailsEntity> getProductById(String prodID);
 
@@ -35,4 +35,6 @@ public interface ManageProductService {
 	ProductDetailsEntity getProductByIdAndUserId(Registration registration, String prodId);
 	
 	ProductDetailsEntity updateProductDetails(Registration registration, String prodId, ProductDetailsEntity newDetailsEntity);
+
+	ProductDetailsEntity deleteByProduct(String prodId, Registration registration);
 }

@@ -22,19 +22,29 @@ public class ProductViewPageController {
 	@GetMapping("/addNewProductPage")
 	public String addNewProduct(Model model,HttpServletRequest request) {
 		String prodId =  request.getParameter("hide-proid");
-		if(prodId != null) {		
-			ProductDetailsEntity pdDetailsEntity =  controller.getProductByIdAndUserName(prodId, request);
-			model.addAttribute("PdDetails",pdDetailsEntity);
+		if(prodId != null) {
+			String btnCheck = request.getParameter("submit");
+			if(btnCheck.equals("edit-btn") && btnCheck !=null) {
+				ProductDetailsEntity pdDetailsEntity =  controller.getProductByIdAndUserName(prodId, request);
+				model.addAttribute("PdDetails",pdDetailsEntity);
+				return "addNewProductPage";	
+			}else {
+			   ProductDetailsEntity detailsEntity =controller.deleteProductById(prodId, request);
+				return "searchProductPage";
+			}	
 		}else {
 			model.addAttribute("PdDetails",new ProductDetailsEntity());
-		}
-		return "addNewProductPage";
-		
+			return "addNewProductPage";
+		}	
 	}
 	@GetMapping("/searchProductPage")
 	public String searchProductPage() {
 		return "searchProductPage";
 	}
 	
-
+	@GetMapping("/manageProductStockPage")
+	public String manageProductStockPage() {
+		
+		return "manageProductStockPage";
+	}
 }

@@ -11,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projects.myshop.Service.ManageProductService;
 import com.projects.myshop.enitity.ProductCompanyEntity;
 import com.projects.myshop.enitity.ProductDetailsEntity;
+import com.projects.myshop.enitity.ProductStockEntity;
 import com.projects.myshop.enitity.ProductTypesEntity;
 
 import com.projects.myshop.enitity.Registration;
 import com.projects.myshop.model.ProductDetailsModel;
 import com.projects.myshop.repository.ManageProductCompanyRepository;
 import com.projects.myshop.repository.ManageProductDetailsRepository;
+import com.projects.myshop.repository.ManageProductStockRepository;
 import com.projects.myshop.repository.ManageProductTypesRepository;
 
 @Service
@@ -31,6 +33,9 @@ public class ManageProductServiceImpl implements ManageProductService {
 	@Autowired
 	ManageProductCompanyRepository companyRepository;
 
+	@Autowired
+	ManageProductStockRepository manageProductStockRepository;
+	
 	@Override
 	public ProductTypesEntity addNewProductTypes(String typeName, Registration re) {
 		// TODO Auto-generated method stub
@@ -43,7 +48,6 @@ public class ManageProductServiceImpl implements ManageProductService {
 	@Override
 	public ProductCompanyEntity addNewProductCompany(ProductCompanyEntity companyEntity, Registration re) {
 		// TODO Auto-generated method stub
-
 		ProductCompanyEntity pdCompany = new ProductCompanyEntity();
 		pdCompany.setCompanyName(companyEntity.getCompanyName().toUpperCase());
 		pdCompany.setProductTypeId(companyEntity.getProductTypeId());
@@ -52,18 +56,19 @@ public class ManageProductServiceImpl implements ManageProductService {
 	}
 
 	@Override
-	public ProductDetailsEntity addNewProduct(ProductDetailsEntity detailsModel, Registration re) {
-
+	public ProductDetailsEntity addNewProduct(ProductDetailsModel detailsModel, Registration re) {
 		ProductDetailsEntity pdDetails = new ProductDetailsEntity();
-
+		ProductStockEntity stockEntity = new ProductStockEntity();
+		stockEntity.setStockQuantity(detailsModel.getProductQuantity());
+		stockEntity.setRemainingQuantity(detailsModel.getProductQuantity());		
 		pdDetails.setTypeId(detailsModel.getTypeId());
 		pdDetails.setCompanyId(detailsModel.getCompanyId());
 		pdDetails.setUserId(re.getOrgid());
 		pdDetails.setProductSpecification(detailsModel.getProductSpecification());
 		pdDetails.setProductModel(detailsModel.getProductModel());
 		pdDetails.setProductColour(detailsModel.getProductColour());
-		pdDetails.setProductQuantity(detailsModel.getProductQuantity());
 		pdDetails.setProductPrice(detailsModel.getProductPrice());
+		pdDetails.setStockEntity(stockEntity);
 		return detailsRepository.save(pdDetails);
 	}
 
@@ -124,5 +129,9 @@ public class ManageProductServiceImpl implements ManageProductService {
 		detailsEntity.setProductPrice(newDetailsEntity.getProductPrice());
 		detailsEntity.setUpdatedDate(new Date());
 		return detailsRepository.save(detailsEntity);
+	}
+
+	public ProductDetailsEntity deleteByProduct(String prodId, Registration registration) {	
+		return detailsRepository.deleteByProdIdAndUserId(prodId, registration.getOrgid());
 	}
 }

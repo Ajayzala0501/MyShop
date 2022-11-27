@@ -29,7 +29,6 @@ import com.projects.myshop.exception.MainExceptionClass.ProductCompanyAlreadyExi
 import com.projects.myshop.exception.MainExceptionClass.ProductTypesAlreadyExits;
 import com.projects.myshop.model.ProductDetailsModel;
 
-
 @RestController
 @RequestMapping("/Product")
 public class ManageProductController {
@@ -83,7 +82,7 @@ public class ManageProductController {
 	}	
 	
 	@PostMapping("/addNewProduct")
-	public ResponseEntity<ResponseMessageClass<Object>>addNewProduct(@RequestBody ProductDetailsEntity  detailsEntity, HttpServletRequest request){
+	public ResponseEntity<ResponseMessageClass<Object>>addNewProduct(@RequestBody ProductDetailsModel  detailsEntity, HttpServletRequest request){
 		Registration re = InfoClass.getCurrentUser(request);	
 		if(re != null) {	
 			ProductDetailsEntity pdDetails = manageProductService.addNewProduct(detailsEntity,re);
@@ -125,7 +124,6 @@ public class ManageProductController {
 		}
 	}
 	
-	
 	@GetMapping("/getAllProductCompany")
 	public ResponseEntity<ResponseMessageClass<Object>> getAllProductCompany(HttpServletRequest request){
 		Registration re = InfoClass.getCurrentUser(request);	
@@ -150,8 +148,7 @@ public class ManageProductController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}
 	}
-	
-	
+
 	@PostMapping("/updateProductDetails/{id}")
 	public ResponseEntity<ResponseMessageClass<Object>> updateProductDetails(HttpServletRequest request, @PathVariable("id") String prodId, @RequestBody ProductDetailsEntity detailsEntity){
 		Registration re = InfoClass.getCurrentUser(request);	
@@ -161,8 +158,7 @@ public class ManageProductController {
 		}
 		else {		
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
-		}
-		
+		}	
 	}
 	
 	public ProductDetailsEntity getProductByIdAndUserName(String prodId, HttpServletRequest request) {
@@ -173,4 +169,13 @@ public class ManageProductController {
 		}
 		return null;
 	}
-}
+	public ProductDetailsEntity deleteProductById(String proId, HttpServletRequest request) {
+		
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {
+			ProductDetailsEntity pdDetails = manageProductService.deleteByProduct(proId, re);
+			return pdDetails;
+		}
+		return null;
+	}
+}   

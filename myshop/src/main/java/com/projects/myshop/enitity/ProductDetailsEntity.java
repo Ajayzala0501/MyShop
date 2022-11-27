@@ -37,7 +37,8 @@ public class ProductDetailsEntity {
 	@Column(name="productSpecification", length=2000)
 	private String productSpecification;
 	
-	private int productQuantity;
+	@OneToOne(mappedBy = "detailsEntity",fetch = FetchType.LAZY)
+	private ProductStockEntity stockEntity;
 	
 	private int productPrice;
 	
@@ -107,8 +108,6 @@ public class ProductDetailsEntity {
 		this.typeId = typeId;
 	}
 
-
-
 	public String getProductModel() {
 		return productModel;
 	}
@@ -127,19 +126,6 @@ public class ProductDetailsEntity {
 	public void setProductColour(String productColour) {
 		this.productColour = productColour;
 	}
-
-
-	
-
-	public int getProductQuantity() {
-		return productQuantity;
-	}
-
-
-	public void setProductQuantity(int productQuantity) {
-		this.productQuantity = productQuantity;
-	}
-
 
 	public int getProductPrice() {
 		return productPrice;
@@ -168,6 +154,12 @@ public class ProductDetailsEntity {
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+	public ProductStockEntity getStockEntity() {
+		return stockEntity;
+	}
+	public void setStockEntity(ProductStockEntity stockEntity) {
+		this.stockEntity = stockEntity;
 	}
 	
 	

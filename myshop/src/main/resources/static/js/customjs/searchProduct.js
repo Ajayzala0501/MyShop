@@ -1,4 +1,6 @@
+
 getAllProductDetails();
+debugger
 function getAllProductDetails() {
 	$.ajax({
 		type: "GET",
@@ -6,7 +8,11 @@ function getAllProductDetails() {
 		url: "/Product/getAllProductInfo",
 		dataType: 'json',
 		success: function(data) {
+			alert(data);
+			console.log(data);
 			if (data["status"] == "OK") {
+				alert("Calll-33");
+				console.log(data["result"]);
 				generateTable(data["result"]);
 			}
 		},
@@ -16,20 +22,22 @@ function getAllProductDetails() {
 	});
 }
 
-function generateTable(data) {
+function generateTable(data2) {
 	var raw = '';
+	data = JSON.parse(data2);
+	
+	alert(data);
 	$(data).each(function(i) {
 		var specInfo = '';
 		var spec = JSON.parse(data[i]["productSpecification"]);
 		$(spec).each(function(index) {
 		specInfo += spec[index]["specification"]+" : "+spec[index]["specification-value"]+" | ";		
 		});		
-		raw += '<tr ><td>' + data[i]["typeId"] + '</td> <td class="text-center">' + data[i]["companyId"] + '</td> <td class="text-center">' + data[i]["productModel"] + '</td><td class="text-center">' + data[i]["productColour"] + '</td><td class="center">' + data[i]["productPrice"] + '</td><td class="center">' + specInfo.slice(0,-2) + '</td><td class="center">' + data[i]["createdDate"] + '</td><td class="text-center"><form action="/ViewProduct/addNewProductPage" method="GET"><input type="text" name="hide-proid" value="'+data[i]["prodId"]+'" hidden><button type="submit" name="btn-edit" value="edit-btn" class="btn btn-primary btn-outline btn-xs">Edit</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger btn-outline btn-xs">Delete</button></form></td></tr>';
+		raw += '<tr ><td>' + data[i]["typeId"] + '</td> <td class="text-center">' + data[i]["companyId"] + '</td> <td class="text-center">' + data[i]["productModel"] + '</td><td class="text-center">' + data[i]["productColour"] + '</td><td class="center">' + data[i]["productPrice"] + '</td><td class="center">' + specInfo.slice(0,-2) + '</td><td class="center">' + data[i]["updatedDate"] + '</td><td class="text-center"><form action="/ViewProduct/addNewProductPage" method="GET"><input type="text" name="hide-proid" value="'+data[i]["prodId"]+'" hidden><button type="submit" name="submit" value="edit-btn" class="btn btn-primary btn-outline btn-xs">Edit</button>&nbsp;&nbsp;<button type="submit" name="submit" value="edit-delete" class="btn btn-danger btn-outline btn-xs">Delete</button></form></td></tr>';
 		
 	})
 	$("#product-Info-table-body").append(raw);
-
-
+	
 }
 $(document).ready(function() {
 	$('.footable').footable();

@@ -1,19 +1,16 @@
 package com.projects.myshop.model;
 
+
 public class ProductDetailsModel {
 	private String typeId;
 	
-	private String productCompany;
+	private String companyId;
 	
 	private String productModel;
 	
 	private String productColour;
 	
-	private String size;
-	
-	private int ram;
-	
-	private int rom;
+	private String productSpecification;
 	
 	private int productQuantity;
 	
@@ -27,12 +24,12 @@ public class ProductDetailsModel {
 		this.typeId = typeId;
 	}
 
-	public String getProductCompany() {
-		return productCompany;
+	public String getCompanyId() {
+		return companyId;
 	}
 
-	public void setProductCompany(String productCompany) {
-		this.productCompany = productCompany;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 	public String getProductModel() {
@@ -51,28 +48,12 @@ public class ProductDetailsModel {
 		this.productColour = productColour;
 	}
 
-	public String getSize() {
-		return size;
+	public String getProductSpecification() {
+		return productSpecification;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public int getRam() {
-		return ram;
-	}
-
-	public void setRam(int ram) {
-		this.ram = ram;
-	}
-
-	public int getRom() {
-		return rom;
-	}
-
-	public void setRom(int rom) {
-		this.rom = rom;
+	public void setProductSpecification(String productSpecification) {
+		this.productSpecification = productSpecification;
 	}
 
 	public int getProductQuantity() {
@@ -90,4 +71,6 @@ public class ProductDetailsModel {
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
+	
+	
 }
