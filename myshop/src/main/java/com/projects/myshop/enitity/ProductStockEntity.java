@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,8 +25,8 @@ public class ProductStockEntity {
 	private Date updatedDate;
 
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "prodRefId", referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name = "prodRefId")
 	private ProductDetailsEntity detailsEntity;
 	
 	public ProductStockEntity() {

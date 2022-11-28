@@ -29,7 +29,7 @@ public class ProductViewPageController {
 				model.addAttribute("PdDetails",pdDetailsEntity);
 				return "addNewProductPage";	
 			}else {
-			   ProductDetailsEntity detailsEntity =controller.deleteProductById(prodId, request);
+				controller.deleteProductById(prodId, request);
 				return "searchProductPage";
 			}	
 		}else {

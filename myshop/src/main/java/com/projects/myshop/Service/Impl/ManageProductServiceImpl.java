@@ -59,8 +59,11 @@ public class ManageProductServiceImpl implements ManageProductService {
 	public ProductDetailsEntity addNewProduct(ProductDetailsModel detailsModel, Registration re) {
 		ProductDetailsEntity pdDetails = new ProductDetailsEntity();
 		ProductStockEntity stockEntity = new ProductStockEntity();
-		stockEntity.setStockQuantity(detailsModel.getProductQuantity());
-		stockEntity.setRemainingQuantity(detailsModel.getProductQuantity());		
+		
+
+		//manageProductStockRepository.save(stockEntity);
+		
+		
 		pdDetails.setTypeId(detailsModel.getTypeId());
 		pdDetails.setCompanyId(detailsModel.getCompanyId());
 		pdDetails.setUserId(re.getOrgid());
@@ -68,8 +71,14 @@ public class ManageProductServiceImpl implements ManageProductService {
 		pdDetails.setProductModel(detailsModel.getProductModel());
 		pdDetails.setProductColour(detailsModel.getProductColour());
 		pdDetails.setProductPrice(detailsModel.getProductPrice());
-		pdDetails.setStockEntity(stockEntity);
-		return detailsRepository.save(pdDetails);
+		
+		stockEntity.setStockQuantity(detailsModel.getProductQuantity());
+		stockEntity.setRemainingQuantity(detailsModel.getProductQuantity());
+		stockEntity.setDetailsEntity(pdDetails);
+		//pdDetails.setStockEntity(stockEntity);
+		ProductStockEntity entity = manageProductStockRepository.save(stockEntity);
+		ProductDetailsEntity addDetails = entity.getDetailsEntity();
+		return addDetails;
 	}
 
 	@Override
@@ -131,7 +140,9 @@ public class ManageProductServiceImpl implements ManageProductService {
 		return detailsRepository.save(detailsEntity);
 	}
 
-	public ProductDetailsEntity deleteByProduct(String prodId, Registration registration) {	
-		return detailsRepository.deleteByProdIdAndUserId(prodId, registration.getOrgid());
+	@Transactional
+	public void deleteByProduct(String prodId, Registration registration) {	
+		ProductDetailsEntity detailsEntity = detailsRepository.findByUserIdAndProdId(registration.getOrgid(), prodId);
+		detailsRepository.delete(detailsEntity);
 	}
 }

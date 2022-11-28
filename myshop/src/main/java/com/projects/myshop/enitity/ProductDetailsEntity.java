@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 
 @Entity	
@@ -33,11 +34,13 @@ public class ProductDetailsEntity {
 	private String productModel;
 	
 	private String productColour;
+
 	@Lob 
 	@Column(name="productSpecification", length=2000)
 	private String productSpecification;
 	
-	@OneToOne(mappedBy = "detailsEntity",fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "detailsEntity",fetch = FetchType.EAGER)
+	@PrimaryKeyJoinColumn
 	private ProductStockEntity stockEntity;
 	
 	private int productPrice;
@@ -154,12 +157,6 @@ public class ProductDetailsEntity {
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
-	}
-	public ProductStockEntity getStockEntity() {
-		return stockEntity;
-	}
-	public void setStockEntity(ProductStockEntity stockEntity) {
-		this.stockEntity = stockEntity;
 	}
 	
 	

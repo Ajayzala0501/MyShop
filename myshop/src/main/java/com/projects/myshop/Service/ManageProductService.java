@@ -36,5 +36,5 @@ public interface ManageProductService {
 	
 	ProductDetailsEntity updateProductDetails(Registration registration, String prodId, ProductDetailsEntity newDetailsEntity);
 
-	ProductDetailsEntity deleteByProduct(String prodId, Registration registration);
+	void deleteByProduct(String prodId, Registration registration);
 }

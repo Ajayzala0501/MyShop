@@ -169,13 +169,12 @@ public class ManageProductController {
 		}
 		return null;
 	}
-	public ProductDetailsEntity deleteProductById(String proId, HttpServletRequest request) {
+	public void deleteProductById(String proId, HttpServletRequest request) {
 		
 		Registration re = InfoClass.getCurrentUser(request);	
 		if(re != null) {
-			ProductDetailsEntity pdDetails = manageProductService.deleteByProduct(proId, re);
-			return pdDetails;
+			manageProductService.deleteByProduct(proId, re);
+			
 		}
-		return null;
-	}
+			}
 }   

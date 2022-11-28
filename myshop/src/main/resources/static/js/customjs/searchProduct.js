@@ -1,6 +1,5 @@
 
 getAllProductDetails();
-debugger
 function getAllProductDetails() {
 	$.ajax({
 		type: "GET",
@@ -8,11 +7,7 @@ function getAllProductDetails() {
 		url: "/Product/getAllProductInfo",
 		dataType: 'json',
 		success: function(data) {
-			alert(data);
-			console.log(data);
 			if (data["status"] == "OK") {
-				alert("Calll-33");
-				console.log(data["result"]);
 				generateTable(data["result"]);
 			}
 		},
@@ -22,11 +17,10 @@ function getAllProductDetails() {
 	});
 }
 
-function generateTable(data2) {
+function generateTable(data) {
 	var raw = '';
-	data = JSON.parse(data2);
+	//data = JSON.parse(data2);
 	
-	alert(data);
 	$(data).each(function(i) {
 		var specInfo = '';
 		var spec = JSON.parse(data[i]["productSpecification"]);
