@@ -10,4 +10,6 @@ import com.projects.myshop.enitity.Registration;
 
 public interface ManageProductStockService {
 	List<ProductStockEntity> getAllProductStockByUserId(Registration registration);
+	
+	ProductStockEntity updateProductStock(ProductStockEntity entity, String userId);
 }

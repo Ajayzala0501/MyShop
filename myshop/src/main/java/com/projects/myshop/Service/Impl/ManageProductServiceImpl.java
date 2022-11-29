@@ -15,6 +15,7 @@ import com.projects.myshop.enitity.ProductStockEntity;
 import com.projects.myshop.enitity.ProductTypesEntity;
 
 import com.projects.myshop.enitity.Registration;
+import com.projects.myshop.model.InformationProjection;
 import com.projects.myshop.model.ProductDetailsModel;
 import com.projects.myshop.repository.ManageProductCompanyRepository;
 import com.projects.myshop.repository.ManageProductDetailsRepository;
@@ -76,6 +77,7 @@ public class ManageProductServiceImpl implements ManageProductService {
 		stockEntity.setRemainingQuantity(detailsModel.getProductQuantity());
 		stockEntity.setDetailsEntity(pdDetails);
 		//pdDetails.setStockEntity(stockEntity);
+		stockEntity.setUserId(re.getOrgid());
 		ProductStockEntity entity = manageProductStockRepository.save(stockEntity);
 		ProductDetailsEntity addDetails = entity.getDetailsEntity();
 		return addDetails;
@@ -144,5 +146,12 @@ public class ManageProductServiceImpl implements ManageProductService {
 	public void deleteByProduct(String prodId, Registration registration) {	
 		ProductDetailsEntity detailsEntity = detailsRepository.findByUserIdAndProdId(registration.getOrgid(), prodId);
 		detailsRepository.delete(detailsEntity);
+	}
+
+	@Override
+	public String getCompanyNameById(String compName, String userId) {
+		// TODO Auto-generated method stub
+	 InformationProjection.getCompanyNameOnly obj =	companyRepository.findByCompanyIdAndOrgRefId(compName, userId);
+		return obj.getCompanyName();
 	}
 }

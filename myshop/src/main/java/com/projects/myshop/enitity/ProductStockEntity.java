@@ -24,6 +24,7 @@ public class ProductStockEntity {
 	
 	private Date updatedDate;
 
+	private String userId;
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "prodRefId")
@@ -90,5 +91,13 @@ public class ProductStockEntity {
 
 	public void setDetailsEntity(ProductDetailsEntity detailsEntity) {
 		this.detailsEntity = detailsEntity;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

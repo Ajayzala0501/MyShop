@@ -37,4 +37,6 @@ public interface ManageProductService {
 	ProductDetailsEntity updateProductDetails(Registration registration, String prodId, ProductDetailsEntity newDetailsEntity);
 
 	void deleteByProduct(String prodId, Registration registration);
+	
+	String getCompanyNameById(String compName,String userId);
 }
