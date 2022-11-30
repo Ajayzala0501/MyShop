@@ -39,7 +39,7 @@ $(document).ready(function() {
 			contentType: "application/json",
 			url: "/Product/getAllProductTypes",
 			data: "",
-			dataType: 'json',
+			dataType:'json',
 			success: function(data) {
 				if (data["status"] == "OK") {
 					var opData = '';
@@ -53,9 +53,7 @@ $(document).ready(function() {
 					opData = '';
 				}
 			}
-		})
-
-
+		})           
 	}
 	//For load all the product company from database
 	function getAllProductCompany() {
@@ -74,25 +72,21 @@ $(document).ready(function() {
 							opData += "<option value='" + item['companyId'] + "'>" + item['companyName'] + "</option>";
 							//alert(item['id']+" "+item['name']+" "+item['department']+" "+item['sem']);
 						});
-
 						$("#productCompanySelectOption").append(opData);
 						$("#productCompanySelectOption").select2().trigger('change');
 						opData = '';
 					} 
 				}
 			})
-		}
-		
-		
-		//For load all the product company from database
+		}		
+	
+	//For load all the product company from database
 	function getAllProductModelInformation() {
-		debugger
 		if($('#productCompanySelectOption').val()!='' && $('#productCompanySelectOption').val() != null){
 		var formData =  {
 					"typeId":$('#productTypeSelectOption').val() ,
 					"companyId":$('#productCompanySelectOption').val()
-				};
-				
+				};			
 			$.ajax({
 				type: "POST",
 				contentType: "application/json",
@@ -103,14 +97,13 @@ $(document).ready(function() {
 					if (data["status"] == "OK") {
 						var opData = '';
 						console.log(data);
-						//$.each(data["result"], function(i, item) {
-							//opData += "<option value='" + item['companyId'] + "'>" + item['companyName'] + "</option>";
+						$.each(data["result"], function(i, item) {
+							opData += "<option value='" + item + "'>" + item + "</option>";
 							//alert(item['id']+" "+item['name']+" "+item['department']+" "+item['sem']);
-						//});
-
-						//$("#productCompanySelectOption").append(opData);
-						//$("#productCompanySelectOption").select2().trigger('change');
-						//opData = '';
+						});
+						$("#productModelSelectOption").append(opData);
+						$("#productModelSelectOption").select2().trigger('change');
+						opData = '';
 					} 
 				}
 			})
@@ -118,16 +111,14 @@ $(document).ready(function() {
 		}
 	
 	$('#productTypeSelectOption').on('change', function(e) {
-		//$('#productCompanySelectOption').val(null).trigger('change');
+	//$('#productCompanySelectOption').val(null).trigger('change');
 		$("#productCompanySelectOption").find('option').remove();
 		getAllProductCompany();
 	});
 	
 	$('#productCompanySelectOption').on('change', function(e) {
-//		$('#productCompanySelectOption').val(null).trigger('change');
-	//	$("#productCompanySelectOption").find('option').remove();
+	//$('#productCompanySelectOption').val(null).trigger('change');
+		$("#productModelSelectOption").find('option').remove();
 		getAllProductModelInformation();
 	});
-	
-
 });
