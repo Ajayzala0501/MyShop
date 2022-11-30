@@ -6,4 +6,12 @@ public interface InformationProjection {
 		String getCompanyName();
 	}
 	
+	interface getTypeIdAndCompanyId{
+		 String getTypeId();
+		 String getCompanyId();
+	}
+	
+	interface getModelNameOnly{
+		String getProductModel();
+	}
 }

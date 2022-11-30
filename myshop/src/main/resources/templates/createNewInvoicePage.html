@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base_page ::Layout('MyShop | Create New Invoice',~{::link},~{:: .main-section},~{::script},~{:: .header-section})">
+
+<head>
+	<title>Add New Product Page</title>
+	<link th:href="@{/css/plugins/select2/select2.min.css}" rel="stylesheet">
+	</link>
+	<link th:href="@{/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css}" rel="stylesheet">
+
+	<link th:href="@{/css/plugins/slick/slick.css}" rel="stylesheet">
+	<link th:href="@{/css/plugins/slick/slick-theme.css}" rel="stylesheet">
+	<link th:href="@{/css/createNewInvoicePage.css}" rel="stylesheet">
+	</link>
+
+</head>
+
+<body>
+	<div class="header-section">
+		<div class="col-sm-4">
+			<h2>Generate Product Invoice</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a th:href="@{/ViewProduct/createNewInvoicePage}"> Invoice Management</a>
+				</li>
+				<li class="active">
+					<strong>Create New Invoice</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="main-section">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+
+					<div class="ibox-content">
+						<form role="form" id="form">
+							<fieldset class="scheduler-border">
+								<legend class="scheduler-border">Customer Details</legend>
+								<div class="row">
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label>Customer Name</label>
+											<input type="text" placeholder="Enter Customer Name" class="form-control"
+												id="customerName" name="customerName">
+										</div>
+
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group"><label>Customer Mobile Number</label> <input type="text"
+												placeholder="Enter email" class="form-control"
+												name="customerMobileNumber" id="customerMobileNumber"></div>
+
+									</div>
+									<div class="col-lg-2 col-lg-offset-3">
+										<div class="form-group"><label>Invoice Date</label> <input type="Date"
+												placeholder="Select Invoice Date" class="form-control"
+												name="invoiceDate" id="invoiceDate"></div>
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Customer Address</label>
+											<textarea placeholder="Enter Customer Address" class="form-control"
+												id="customerAddress" name="customerAddress" style="resize:none"
+												rows="3"></textarea>
+
+										</div>
+
+									</div>
+
+								</div>
+							</fieldset>
+							<fieldset class="scheduler-border">
+								<legend class="scheduler-border">Product Details</legend>
+								<div class="row">
+									<div class="col-lg-3">
+										<div><label>Select Product Type</label>
+											<select id="productTypeSelectOption" name="productTypeSelectOption"
+												class="select2_demo_3 form-control">
+											</select>
+										</div>
+
+									</div>
+									<div class="col-lg-3">
+										<div><label>Select Product Company</label>
+											<select id="productCompanySelectOption" name="productCompanySelectOption"
+												class="select2_demo_3 form-control">
+											</select>
+										</div>
+
+									</div>
+									<div class="col-lg-3 ">
+										<div><label>Select Product Model</label>
+											<select id="productTypeSelectOption2" name="productTypeSelectOption"
+												class="select2_demo_3 form-control">
+											</select>
+										</div>
+
+									</div>
+									<div class="col-lg-3 ">
+										<div class="form-group"><label>Invoice Date</label> <input type="Date"
+												placeholder="Select Invoice Date" class="form-control"
+												name="invoiceDate" id="invoiceDate"></div>
+
+									</div>
+								</div>
+								<div class="row rowPadding">
+									<div class="col-lg-12" style="background-color: #f3f3f3;">
+										<div style="margin:20px; background-color: #f3f3f3;">
+											<div class="slick_demo_2" style="margin-bottom: -20px;">
+												<div>
+													<div class="ibox">
+														<div class="ibox-content product-box">
+															<div class="product-desc">
+																<span class="product-price"
+																	style="top: 6px; right: 6px; ">
+																	$10
+																</span>
+																<small class="text-muted">Category</small>
+																<a href="#" class="product-name"> Product</a>
+
+
+
+																<div class="small m-t-xs">
+																	Many desktop publishing packages and web page
+																	editors now.
+																</div>
+																<div class="m-t text-righ">
+
+																	<a href="#"
+																		class="btn btn-xs btn-outline btn-primary">Info
+																		<i class="fa fa-long-arrow-right"></i> </a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div>
+													<div class="ibox">
+														<div class="ibox-content product-box">
+															<div class="product-desc">
+																<span class="product-price"
+																	style="top: 6px; right: 6px; ">
+																	$10
+																</span>
+																<small class="text-muted">Category</small>
+																<a href="#" class="product-name"> Product</a>
+
+
+
+																<div class="small m-t-xs">
+																	Many desktop publishing packages and web page
+																	editors now.
+																</div>
+																<div class="m-t text-righ">
+
+																	<a href="#"
+																		class="btn btn-xs btn-outline btn-primary">Info
+																		<i class="fa fa-long-arrow-right"></i> </a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div>
+													<div class="ibox">
+														<div class="ibox-content product-box">
+															<div class="product-desc">
+																<span class="product-price"
+																	style="top: 6px; right: 6px; ">
+																	$10
+																</span>
+																<small class="text-muted">Category</small>
+																<a href="#" class="product-name"> Product</a>
+
+
+
+																<div class="small m-t-xs">
+																	Many desktop publishing packages and web page
+																	editors now.
+																</div>
+																<div class="m-t text-righ">
+
+																	<a href="#"
+																		class="btn btn-xs btn-outline btn-primary">Info
+																		<i class="fa fa-long-arrow-right"></i> </a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div>
+													<div class="ibox">
+														<div class="ibox-content product-box">
+															<div class="product-desc">
+																<span class="product-price"
+																	style="top: 6px; right: 6px; ">
+																	$10
+																</span>
+																<small class="text-muted">Category</small>
+																<a href="#" class="product-name"> Product</a>
+
+
+
+																<div class="small m-t-xs">
+																	Many desktop publishing packages and web page
+																	editors now.
+																</div>
+																<div class="m-t text-righ">
+
+																	<a href="#"
+																		class="btn btn-xs btn-outline btn-primary">Info
+																		<i class="fa fa-long-arrow-right"></i> </a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</fieldset>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script th:src="@{/js/plugins/select2/select2.full.min.js}"></script>
+	<!-- TouchSpin -->
+	<script th:src="@{/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js}"></script>
+	<script th:src="@{/js/plugins/typehead/bootstrap3-typeahead.min.js}"></script>
+
+	<!-- slick carousel-->
+	<script th:src="@{/js/plugins/slick/slick.min.js}"></script>
+	<script th:src="@{/js/customjs/createNewInvoice.js}"></script>
+
+</body>
+
+</html>

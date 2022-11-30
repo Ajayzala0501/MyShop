@@ -1,5 +1,6 @@
 package com.projects.myshop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,9 @@ import com.projects.myshop.enitity.Registration;
 import com.projects.myshop.exception.MainExceptionClass;
 import com.projects.myshop.exception.MainExceptionClass.ProductCompanyAlreadyExits;
 import com.projects.myshop.exception.MainExceptionClass.ProductTypesAlreadyExits;
+import com.projects.myshop.model.InformationProjection;
+import com.projects.myshop.model.InputModels;
+//import com.projects.myshop.model.InputModels.TypeIdAndCompanyId;
 import com.projects.myshop.model.ProductDetailsModel;
 
 @RestController
@@ -172,6 +176,23 @@ public class ManageProductController {
 					.body(new ResponseMessageClass<Object>("Please Do Login First", HttpStatus.BAD_REQUEST, "error"));
 		}
 	}
+	
+	@PostMapping("/getAllProductModel")
+	public ResponseEntity<ResponseMessageClass<Object>> getAllProductModel(@RequestBody InputModels.TypeIdAndCompanyId idAndCompanyId,HttpServletRequest request){
+		Registration re = InfoClass.getCurrentUser(request);
+		if (re != null) {
+		
+			List<String> modelName = manageProductService.getModelNameBasedTypeIdAndCompanyId(idAndCompanyId.getTypeId(), idAndCompanyId.getCompanyId(), re.getOrgid()) ;
+			
+			
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseMessageClass<Object>(modelName, HttpStatus.OK, "success"));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ResponseMessageClass<Object>("Please Do Login First", HttpStatus.BAD_REQUEST, "error"));
+		}
+	}
+	
 
 	@PostMapping("/updateProductDetails/{id}")
 	public ResponseEntity<ResponseMessageClass<Object>> updateProductDetails(HttpServletRequest request,

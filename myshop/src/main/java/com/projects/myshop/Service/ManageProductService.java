@@ -9,6 +9,7 @@ import com.projects.myshop.enitity.ProductCompanyEntity;
 import com.projects.myshop.enitity.ProductDetailsEntity;
 import com.projects.myshop.enitity.ProductTypesEntity;
 import com.projects.myshop.enitity.Registration;
+import com.projects.myshop.model.InformationProjection;
 import com.projects.myshop.model.ProductDetailsModel;
 
 @Service
@@ -39,4 +40,8 @@ public interface ManageProductService {
 	void deleteByProduct(String prodId, Registration registration);
 	
 	String getCompanyNameById(String compName,String userId);
+	
+	 List<String> getModelNameBasedTypeIdAndCompanyId(String typeId, String companyId, String userId);
 }
+
+

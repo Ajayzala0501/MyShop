@@ -40,8 +40,7 @@ public class ManageProductStockController {
 			List<ProductStockEntity> psList = manageProductStockService.getAllProductStockByUserId(re); 
 			List<StockDisplayModel> displayModels = new ArrayList<>(); 
 			 
-			 SimpleDateFormat DateFor = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
+			SimpleDateFormat DateFor = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			   
 			for(ProductStockEntity entity :psList) {
 				StockDisplayModel displayModel = new StockDisplayModel();

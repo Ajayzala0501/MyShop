@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.projects.myshop.enitity.ProductDetailsEntity;
+import com.projects.myshop.model.InformationProjection;
 
 @Repository
 public interface ManageProductDetailsRepository extends JpaRepository<ProductDetailsEntity, Long> {
@@ -22,4 +23,9 @@ public interface ManageProductDetailsRepository extends JpaRepository<ProductDet
 	ProductDetailsEntity findProductByUserIdAndProdId(String userId, String prodId);
 	
 	ProductDetailsEntity findByUserIdAndProdId(String userId, String pString);
+	
+	//@Query(value = "SELECT pd.product_model FROM product_details_entity pd where pd.type_id = ?1 AND pd.company_id = ?2 AND pd.user_id = ?3", nativeQuery = true)
+//	List<InformationProjection.getModelNameOnly> getModelNameBasedTypeIdAndCompanyId(String typeId, String companyId, String userId);
+
+	List<InformationProjection.getModelNameOnly> findByTypeIdAndCompanyIdAndUserId(String typeId, String companyId, String userId);
 }

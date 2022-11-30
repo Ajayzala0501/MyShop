@@ -43,8 +43,12 @@ public class ProductViewPageController {
 	}
 	
 	@GetMapping("/manageProductStockPage")
-	public String manageProductStockPage() {
-		
+	public String manageProductStockPage() {	
 		return "manageProductStockPage";
+	}
+	
+	@GetMapping("/createNewInvoicePage")
+	public String createNewInvoicePage() {
+		return "createNewInvoicePage";
 	}
 }

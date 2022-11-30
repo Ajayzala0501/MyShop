@@ -1,5 +1,6 @@
 package com.projects.myshop.Service.Impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import com.projects.myshop.enitity.ProductTypesEntity;
 
 import com.projects.myshop.enitity.Registration;
 import com.projects.myshop.model.InformationProjection;
+import com.projects.myshop.model.InformationProjection.getModelNameOnly;
 import com.projects.myshop.model.ProductDetailsModel;
 import com.projects.myshop.repository.ManageProductCompanyRepository;
 import com.projects.myshop.repository.ManageProductDetailsRepository;
@@ -153,5 +155,16 @@ public class ManageProductServiceImpl implements ManageProductService {
 		// TODO Auto-generated method stub
 	 InformationProjection.getCompanyNameOnly obj =	companyRepository.findByCompanyIdAndOrgRefId(compName, userId);
 		return obj.getCompanyName();
+	}
+
+	@Override
+	public List<String> getModelNameBasedTypeIdAndCompanyId(String typeId, String companyId, String userId) {
+		// TODO Auto-generated method stub
+		List<String> models = new ArrayList<>();
+		List<InformationProjection.getModelNameOnly> pdModel =detailsRepository.findByTypeIdAndCompanyIdAndUserId(typeId, companyId, userId);
+		for(InformationProjection.getModelNameOnly data : pdModel) {
+			models.add(data.getProductModel()); 
+		}
+		return models;
 	}
 }
