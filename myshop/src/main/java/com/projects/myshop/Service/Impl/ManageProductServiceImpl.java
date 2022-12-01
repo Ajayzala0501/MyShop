@@ -167,4 +167,22 @@ public class ManageProductServiceImpl implements ManageProductService {
 		}
 		return models;
 	}
+
+	@Override
+	public List<ProductDetailsEntity> getProductInfoBasedOnModel(String typeId, String companyId, String model,
+			String userId) {
+		// TODO Auto-generated method stub
+		List<ProductDetailsEntity> entityList = new ArrayList<>();
+		List<InformationProjection.getProductInfoBasedOnModel> obj = detailsRepository.findByTypeIdAndCompanyIdAndProductModelAndUserId(typeId, companyId, model, userId);
+		for(InformationProjection.getProductInfoBasedOnModel objInput : obj) {
+			ProductDetailsEntity entity = new ProductDetailsEntity();
+			entity.setProdId(objInput.getProdId());
+			entity.setProductColour(objInput.getProductColour());
+			entity.setProductPrice(objInput.getProductPrice());
+			entity.setProductSpecification(objInput.getProductSpecification());
+			entityList.add(entity);
+		}
+		
+		return entityList;
+	}
 }

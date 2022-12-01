@@ -41,7 +41,9 @@ public interface ManageProductService {
 	
 	String getCompanyNameById(String compName,String userId);
 	
-	 List<String> getModelNameBasedTypeIdAndCompanyId(String typeId, String companyId, String userId);
+	List<String> getModelNameBasedTypeIdAndCompanyId(String typeId, String companyId, String userId);
+	 
+	List<ProductDetailsEntity> getProductInfoBasedOnModel(String typeId, String companyId,String model, String userId);
 }
 
 

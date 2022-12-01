@@ -181,12 +181,23 @@ public class ManageProductController {
 	public ResponseEntity<ResponseMessageClass<Object>> getAllProductModel(@RequestBody InputModels.TypeIdAndCompanyId idAndCompanyId,HttpServletRequest request){
 		Registration re = InfoClass.getCurrentUser(request);
 		if (re != null) {
-		
 			List<String> modelName = manageProductService.getModelNameBasedTypeIdAndCompanyId(idAndCompanyId.getTypeId(), idAndCompanyId.getCompanyId(), re.getOrgid()) ;
-			
-			
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(new ResponseMessageClass<Object>(modelName, HttpStatus.OK, "success"));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ResponseMessageClass<Object>("Please Do Login First", HttpStatus.BAD_REQUEST, "error"));
+		}
+	}
+	
+	
+	@PostMapping("/getAllProductInfoBasedOnModel")
+	public ResponseEntity<ResponseMessageClass<Object>> getAllProductInfoBasedOnModel(@RequestBody InputModels.TypeIdAndCompanyId idAndCompanyId,HttpServletRequest request){
+		Registration re = InfoClass.getCurrentUser(request);
+		if (re != null) {
+			List<ProductDetailsEntity> entityList = manageProductService.getProductInfoBasedOnModel(idAndCompanyId.getTypeId(), idAndCompanyId.getCompanyId(),idAndCompanyId.getModel(), re.getOrgid()) ;
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseMessageClass<Object>(entityList, HttpStatus.OK, "success"));
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ResponseMessageClass<Object>("Please Do Login First", HttpStatus.BAD_REQUEST, "error"));
@@ -218,16 +229,13 @@ public class ManageProductController {
 	}
 
 	public void deleteProductById(String proId, HttpServletRequest request) {
-
 		Registration re = InfoClass.getCurrentUser(request);
 		if (re != null) {
 			manageProductService.deleteByProduct(proId, re);
-
 		}
 	}
 	
-	public String findProductCompanyNameById(String id, String orgId) {
-		
+	public String findProductCompanyNameById(String id, String orgId) {	
 		return manageProductService.getCompanyNameById(id,orgId);
 	}
 }

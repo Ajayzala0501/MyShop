@@ -17,6 +17,8 @@ public class InputModels {
 		private String typeId;
 		
 		private String companyId;
+		
+		private String model;
 
 		public String getTypeId() {
 			return typeId;
@@ -32,6 +34,14 @@ public class InputModels {
 
 		public void setCompanyId(String companyId) {
 			this.companyId = companyId;
+		}
+
+		public String getModel() {
+			return model;
+		}
+
+		public void setModel(String model) {
+			this.model = model;
 		}
 	}
 }

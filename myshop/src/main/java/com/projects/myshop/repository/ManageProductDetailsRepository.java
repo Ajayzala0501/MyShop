@@ -28,4 +28,6 @@ public interface ManageProductDetailsRepository extends JpaRepository<ProductDet
 //	List<InformationProjection.getModelNameOnly> getModelNameBasedTypeIdAndCompanyId(String typeId, String companyId, String userId);
 
 	List<InformationProjection.getModelNameOnly> findByTypeIdAndCompanyIdAndUserId(String typeId, String companyId, String userId);
+	
+	List<InformationProjection.getProductInfoBasedOnModel>findByTypeIdAndCompanyIdAndProductModelAndUserId(String typeId, String companyId,String model, String userId);
 }

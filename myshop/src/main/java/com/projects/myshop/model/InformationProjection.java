@@ -14,4 +14,11 @@ public interface InformationProjection {
 	interface getModelNameOnly{
 		String getProductModel();
 	}
+	
+	interface getProductInfoBasedOnModel{
+		String getProdId();
+		String getProductColour();
+		String getProductSpecification();
+		int getProductPrice();
+	}
 }
