@@ -47,6 +47,11 @@ public class ProductDetailsEntity {
 	
 	private Date createdDate;
 	
+	public ProductStockEntity getStockEntity() {
+		return stockEntity;
+	}
+
+
 	private Date updatedDate;
 	
 	public ProductDetailsEntity() {

@@ -17,6 +17,7 @@ import com.projects.myshop.enitity.ProductTypesEntity;
 
 import com.projects.myshop.enitity.Registration;
 import com.projects.myshop.model.InformationProjection;
+import com.projects.myshop.model.InputModels;
 import com.projects.myshop.model.InformationProjection.getModelNameOnly;
 import com.projects.myshop.model.ProductDetailsModel;
 import com.projects.myshop.repository.ManageProductCompanyRepository;
@@ -163,7 +164,10 @@ public class ManageProductServiceImpl implements ManageProductService {
 		List<String> models = new ArrayList<>();
 		List<InformationProjection.getModelNameOnly> pdModel =detailsRepository.findByTypeIdAndCompanyIdAndUserId(typeId, companyId, userId);
 		for(InformationProjection.getModelNameOnly data : pdModel) {
-			models.add(data.getProductModel()); 
+			if(!models.contains(data.getProductModel())) {
+
+				models.add(data.getProductModel()); 	
+			}
 		}
 		return models;
 	}
@@ -173,14 +177,17 @@ public class ManageProductServiceImpl implements ManageProductService {
 			String userId) {
 		// TODO Auto-generated method stub
 		List<ProductDetailsEntity> entityList = new ArrayList<>();
-		List<InformationProjection.getProductInfoBasedOnModel> obj = detailsRepository.findByTypeIdAndCompanyIdAndProductModelAndUserId(typeId, companyId, model, userId);
-		for(InformationProjection.getProductInfoBasedOnModel objInput : obj) {
-			ProductDetailsEntity entity = new ProductDetailsEntity();
-			entity.setProdId(objInput.getProdId());
-			entity.setProductColour(objInput.getProductColour());
-			entity.setProductPrice(objInput.getProductPrice());
-			entity.setProductSpecification(objInput.getProductSpecification());
-			entityList.add(entity);
+		List<ProductDetailsEntity> obj = detailsRepository.getByTypeIdAndCompanyIdAndProductModelAndUserId(typeId, companyId, model, userId);
+		for(ProductDetailsEntity objInput : obj) {
+			if(objInput.getStockEntity().getRemainingQuantity() > 0) {
+				ProductDetailsEntity entity = new ProductDetailsEntity();
+				entity.setProdId(objInput.getProdId());
+				entity.setProductColour(objInput.getProductColour());
+				entity.setProductPrice(objInput.getProductPrice());
+				entity.setProductSpecification(objInput.getProductSpecification());
+				entityList.add(entity);
+
+			}
 		}
 		
 		return entityList;

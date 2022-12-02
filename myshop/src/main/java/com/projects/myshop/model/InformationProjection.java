@@ -1,5 +1,7 @@
 package com.projects.myshop.model;
 
+import com.projects.myshop.enitity.ProductStockEntity;
+
 public interface InformationProjection {
 
 	interface getCompanyNameOnly{
@@ -20,5 +22,6 @@ public interface InformationProjection {
 		String getProductColour();
 		String getProductSpecification();
 		int getProductPrice();
+		int getRemainingQuantity();
 	}
 }

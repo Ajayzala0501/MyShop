@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.projects.myshop.enitity.ProductDetailsEntity;
 import com.projects.myshop.model.InformationProjection;
+import com.projects.myshop.model.InputModels;
 
 @Repository
 public interface ManageProductDetailsRepository extends JpaRepository<ProductDetailsEntity, Long> {
@@ -29,5 +30,8 @@ public interface ManageProductDetailsRepository extends JpaRepository<ProductDet
 
 	List<InformationProjection.getModelNameOnly> findByTypeIdAndCompanyIdAndUserId(String typeId, String companyId, String userId);
 	
-	List<InformationProjection.getProductInfoBasedOnModel>findByTypeIdAndCompanyIdAndProductModelAndUserId(String typeId, String companyId,String model, String userId);
+	@Query(value = "SELECT *FROM product_details_entity pd inner join product_stock_entity ps on pd.id = ps.prod_ref_id where pd.type_id = ?1 AND pd.company_id =?2 AND pd.product_model =?3 AND pd.user_id = ?4 ", nativeQuery = true)
+	List<ProductDetailsEntity>getByTypeIdAndCompanyIdAndProductModelAndUserId(String typeId, String companyId,String model, String userId);
+
+	//pd.prod_id,pd.product_colour,pd.product_price, pd.product_specification,ps.remaining_quantity
 }
