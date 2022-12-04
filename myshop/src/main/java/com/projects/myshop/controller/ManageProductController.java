@@ -168,7 +168,12 @@ public class ManageProductController {
 	public ResponseEntity<ResponseMessageClass<Object>> getAllProductInfo(HttpServletRequest request) {
 		Registration re = InfoClass.getCurrentUser(request);
 		if (re != null) {
+			
 			List<ProductDetailsEntity> pdDetails = manageProductService.getAllProducts(re);
+			for(int i=0; i < pdDetails.size();i++) {
+				pdDetails.get(i).setStockEntity(null);
+			}
+			
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(new ResponseMessageClass<Object>(pdDetails, HttpStatus.OK, "success"));
 		} else {

@@ -163,6 +163,10 @@ public class ProductDetailsEntity {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+	public void setStockEntity(ProductStockEntity stockEntity) {
+		this.stockEntity = stockEntity;
+	}
+	
 	
 	
 }
