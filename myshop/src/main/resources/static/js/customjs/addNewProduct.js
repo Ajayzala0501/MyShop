@@ -159,7 +159,6 @@ $(document).ready(function() {
 		$("#error-for-type").hide();
 	});
 
-
 	//For add new product company
 	$("#productCompanyForm").validate({
 		rules: {
