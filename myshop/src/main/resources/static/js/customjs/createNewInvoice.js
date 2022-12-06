@@ -2,7 +2,7 @@
 var i = 0;
 function addRowToTable(id) {
 	var divId = '#' + id + '';
-	alert($(divId).find('#inputsm').val());
+	//alert($(divId).find('#inputsm').val());
 	//alert($(divId).find('#hide-speci').val());
 	if ($(divId).find('#inputsm').val() != '' && $(divId).find('#inputsm').val() > 0) {
 		//alert("ok");
@@ -14,7 +14,7 @@ function addRowToTable(id) {
 
 		var price = Number($(divId).find('#pd-price').text().slice(2)) * Number(quan);
 		//alert(prodId+" "+specification+" "+companyName+" "+model+" "+quan+" "+price);
-		var raw = '<tr id="rawProIdHide" value="' + prodId + '"><td id="rawHideSpeci" value="' + specification + '">' + (++i) + '</td><td class="text-center" id="rawProductId" value="' + prodId + '">' + prodId + '</td><td class="text-center" id="rawCompanyName" value="' + companyName + '">' + companyName + '</td><td class="text-center" id="rawModel" value="' + model + '">' + model + '</td><td class="text-center" id="rawQuantity" value="' + quan + '">' + quan + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + price + '">' + price + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
+		var raw = '<tr id="rawProIdHide" value="' + prodId + '"><td id="rawHideSpeci" value=\'' + specification + '\'>' + (++i) + '</td><td class="text-center" id="rawProductId" value="' + prodId + '">' + prodId + '</td><td class="text-center" id="rawCompanyName" value="'+companyName+'">'+companyName+'</td><td class="text-center" id="rawModel" value="' + model + '">' + model + '</td><td class="text-center" id="rawQuantity" value="' + quan + '">' + quan + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + price + '">' + price + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
 		addToTableBody(raw, prodId, quan, price);
 		$(divId).find('#error-for-product').hide();
 	}
@@ -38,19 +38,33 @@ function addToTableBody(data, id, quan, price) {
 			$(this).find("td:nth-child(5)").attr("id", Number(tempQuan) + Number(quan));
 			$(this).find("td:nth-child(6)").text(Number(tempPrice) + Number(price));
 			$(this).find("td:nth-child(6)").attr("id", Number(tempPrice) + Number(tempPrice));
+			getSubTotal();
 			checkIfExits = false;
 		}
 
 	});
 	if (checkIfExits) {
 		$("#tbl-invoice-body").append(data);
+		getSubTotal();
+		setRowCount();
 	}
 }
 
+function getSubTotal() {
+	var subTotal = 0;
+	$("#tbl-invoice-body tr").each(function() {
+		// console.log($(this).attr("value"));
+		subTotal = subTotal + Number($(this).find("td:nth-child(6)").text());
+	});
+
+	$("#subTotal").html(subTotal);
+	$("#perValue").html(Number(12 / 100) * Number(subTotal));
+	$("#Total").html(Number(subTotal) + Number(12 / 100) * Number(subTotal));
+}
 function setRowCount() {
 	$("#tbl-invoice-body tr").each(function(ind, v) {
 		//$(this).attr("id", i + 1);
-		alert(ind);
+
 		$(this).find("td:nth-child(1)").text(ind + 1);
 		//$(this).find("td:nth-child(1)").attr("id", i + 1);
 	});
@@ -59,7 +73,116 @@ $("#tbl-invoice").on("click", ".btn-delete", function() {
 	$(this).closest("tr").remove();
 	i--;
 	setRowCount();
+	getSubTotal();
 });
+
+$("#btn-generateInvoice").click(function() {
+	$("#createInvoiceForm").validate({
+		rules: {
+			customerName: {
+				required: true
+			},
+			customerMobileNumber: {
+				required: true,
+				digits: true
+			},
+			invoiceDate: {
+				required: true
+			},
+			customerAddress: {
+				required: true
+			}
+		},
+		messages: {
+			customerName: {
+				required: "Please fill the customer name"
+			},
+			customerMobileNumber: {
+				required: "Please fill the Customer MobileNumber",
+				minlength: "Please enter valid mobile number"
+			},
+			productModel: {
+				required: "Please enter the product model"
+			},
+			invoiceDate: {
+				required: "Please select invoice date"
+			},
+			customerAddress: {
+				required: "Please fill the customer address "
+			}
+		},
+		submitHandler: function(form, e) {
+			e.preventDefault();
+			if ($('#tbl-invoice-body tr').length > 0) {
+				var data = createJSON();
+				alert(JSON.stringify(data));
+				localStorage.setItem("InvoiceDetails",JSON.stringify(data));
+				//window.location.href = 'generateInvoicePage';
+			} else {
+				$("#invoice-fieldSet").removeClass("scheduler-border");
+				$("#invoice-legend").removeClass("scheduler-border");
+				$("#invoice-fieldSet").addClass("fieldset-scheduler-border-error");
+				$("#invoice-legend").addClass("legend-scheduler-border-error");
+				$("#invoice-legend").html("Please Enter Atleast 1 Product");
+			}
+		}
+	});
+});
+
+
+function createJSON() {
+	jsonMain = [];
+
+	jsonObj = [];
+	$("#tbl-invoice-body tr").each(function() {
+		
+		subItem = {}
+		subItem["productSpecification"] = $(this).children().eq(0).attr("value");
+		subItem["prodID"] = $(this).children().eq(1).attr("value");
+		subItem["prodCompany"] = $.trim($(this).children().eq(2).attr("value"));
+		subItem["prodModel"] = $(this).children().eq(3).attr("value");
+		subItem["prodQuantity"] = $(this).children().eq(4).attr("value");
+		subItem["prodTotalPrice"] = $(this).children().eq(5).attr("value");
+		jsonObj.push(subItem);
+		
+	});
+	item = {}
+
+	item["customerName"] = $("#customerName").val();
+	item["customerMobileNumber"] = $("#customerMobileNumber").val();
+	item["customerAddress"] = $("#customerAddress").val();
+	item["invoiceID"] = $("#setInvoiceID").html();
+	item["invoiceDate"] = $("#invoiceDate").val();	
+	item["invoiceDetails"] = jsonObj;
+	item["invoiceSubTotal"] = $("#subTotal").html();
+	item["invoiceTax"] = $("#perValue").html();
+	item["invoiceTotal"] = $("#Total").html();
+	jsonMain.push(item);
+
+	return jsonMain;
+}
+
+
+function generateId(length) {
+	var result = '';
+	if (length == 8) {
+		var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		var charactersLength = characters.length;
+		for (var i = 0; i < length; i++) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+	} else {
+		var characters = '0123456789';
+		var charactersLength = characters.length;
+		for (var i = 0; i < length; i++) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+	}
+
+	return result;
+}
+
+$("#setInvoiceID").html("INV-" + generateId(8) + "-" + generateId(2));
 $(document).ready(function() {
 
 	getAllProductTypes();
@@ -168,7 +291,7 @@ $(document).ready(function() {
 						var cardData = '';
 						$.each(data["result"], function(i, item) {
 
-							cardData += '<div id=' + data["result"][i]["prodId"] + '><div class=ibox><div class="ibox-content product-box"><div class=product-desc><div class=row><div class=col-sm-8 style=height:39px><div hidden class="alert alert-danger"style=padding:7px id="error-for-product"><p>Please Enter Atleast 1 Quantity</div></div><div class=col-sm-4 style=margin-top:-5px><input id="hide-prodId" type="hidden" value="' + data["result"][i]["prodId"] + '" name="hide-prodId"><input id="hide-speci" type="hidden" value=\'' + data["result"][i]["productSpecification"] + '\'" name="hide-speci"> <span class="product-price" id="pd-price"style=top:6px;right:6px>₹ ' + data["result"][i]["productPrice"] + '</span></div></div><p class=product-name>' + $('#productModelSelectOption').val() + '</p><small class="text-muted">'+data["result"][i]["prodId"]+'</small><div class="m-t-xs small"><div class=row>'
+							cardData += '<div id=' + data["result"][i]["prodId"] + '><div class=ibox><div class="ibox-content product-box"><div class=product-desc><div class=row><div class=col-sm-8 style=height:39px><div hidden class="alert alert-danger"style=padding:7px id="error-for-product"><p>Please Enter Atleast 1 Quantity</div></div><div class=col-sm-4 style=margin-top:-5px><input id="hide-prodId" type="hidden" value="' + data["result"][i]["prodId"] + '" name="hide-prodId"><input id="hide-speci" type="hidden" value=\'' + data["result"][i]["productSpecification"] + '\'" name="hide-speci"> <span class="product-price" id="pd-price"style=top:6px;right:6px>₹ ' + data["result"][i]["productPrice"] + '</span></div></div><p class=product-name>' + $('#productModelSelectOption').val() + '</p><small class="text-muted">' + data["result"][i]["prodId"] + '</small><div class="m-t-xs small"><div class=row>'
 							var specData = JSON.parse(data["result"][i]["productSpecification"]);
 
 							$.each(specData, function(i, item) {

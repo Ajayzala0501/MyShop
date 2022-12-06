@@ -51,4 +51,10 @@ public class ProductViewPageController {
 	public String createNewInvoicePage() {
 		return "createNewInvoicePage";
 	}
+	
+	@GetMapping("/generateInvoicePage")
+	public String generateInvoicePage() {
+		return "generateInvoicePage";
+	}
+
 }

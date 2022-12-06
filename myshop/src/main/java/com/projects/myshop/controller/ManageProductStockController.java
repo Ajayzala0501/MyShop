@@ -50,6 +50,7 @@ public class ManageProductStockController {
 				displayModel.setRemainingQuantity(entity.getRemainingQuantity());
 				displayModel.setUpdatedDate(DateFor.format(entity.getUpdatedDate()));
 				displayModel.setStockId(entity.getStockId());
+				displayModel.setProdId(entity.getDetailsEntity().getProdId());
 				displayModels.add(displayModel);
 			}
 			

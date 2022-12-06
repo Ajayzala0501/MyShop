@@ -4677,7 +4677,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
 .invoice-total > tbody > tr > td:last-child {
   border-bottom: 1px solid #DDDDDD;
   text-align: right;
-  width: 15%;
+  width: 25%;
 }
 /* ERROR & LOGIN & LOCKSCREEN*/
 .middle-box {

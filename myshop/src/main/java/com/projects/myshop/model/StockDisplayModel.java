@@ -15,6 +15,8 @@ public class StockDisplayModel {
 	private String updatedDate;
 	
 	private String stockId;
+	
+	private String prodId;
 
 	public String getCompName() {
 		return compName;
@@ -62,6 +64,14 @@ public class StockDisplayModel {
 
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public String getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(String prodId) {
+		this.prodId = prodId;
 	}
 	
 }
