@@ -1,0 +1,13 @@
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #invoice-div-print > *{
+    visibility: visible;
+  }
+  #invoice-div-print > *{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

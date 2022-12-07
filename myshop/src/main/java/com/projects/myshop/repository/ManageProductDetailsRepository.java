@@ -34,4 +34,7 @@ public interface ManageProductDetailsRepository extends JpaRepository<ProductDet
 	List<ProductDetailsEntity>getByTypeIdAndCompanyIdAndProductModelAndUserId(String typeId, String companyId,String model, String userId);
 
 	//pd.prod_id,pd.product_colour,pd.product_price, pd.product_specification,ps.remaining_quantity
+	
+	InformationProjection.getOnlyId findByProdIdAndUserId( String pString,String userId);
+
 }

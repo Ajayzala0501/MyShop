@@ -50,7 +50,7 @@ public class WebConfiguration  extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stubhttp.authorizeRequests()
-		http.authorizeRequests().antMatchers("/Product/**","/Stock/**","/ViewProduct/**").hasAuthority("USER").antMatchers("/emptyPage","/registerPageLink","/forgotPassword","/verifyToken","/verifyTokenForRegistration","/Registration/**","/login").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")  
+		http.authorizeRequests().antMatchers("/Product/**","/Stock/**","/ManageInvoice/**","/ViewProduct/**").hasAuthority("USER").antMatchers("/emptyPage","/registerPageLink","/forgotPassword","/verifyToken","/verifyTokenForRegistration","/Registration/**","/login").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")  
 	      .defaultSuccessUrl("/",true)
 	      .failureUrl("/login?error=true").and().csrf().disable();
 	}	

@@ -4,7 +4,7 @@
 
 <head>
 	<title>Add New Product Page</title>
-	<link th:href="@{/#}" rel="stylesheet">
+	<link th:href="@{/css/generateInvoicePage.css}" rel="stylesheet">
 	</link>
 </head>
 
@@ -26,15 +26,15 @@
 		</div>
 		<div class="col-lg-4">
 			<div class="title-action">
-				<a href="#" class="btn btn-white"><i class="fa fa-pencil"></i> Edit </a>
-				<a href="#" class="btn btn-white"><i class="fa fa-check "></i> Save </a>
-				<a href="invoice_print.html" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print
+				<a type="button" id="btn-edit-invoice" class="btn btn-white"><i class="fa fa-pencil"></i> Edit </a>
+				<a type="button" id="btn-save-invoice" class="btn btn-white"><i class="fa fa-check "></i> Save </a>
+				<a id="btn-invoice-print" class="btn btn-primary"><i class="fa fa-print"></i> Print
 					Invoice </a>
 			</div>
 		</div>
 	</div>
 	<div class="main-section">
-		<div class="ibox-content p-xl">
+		<div class="ibox-content p-xl" id="invoice-div-print">
 			<div class="row">
 				<div class="col-sm-6">
 					<h5>From:</h5>
@@ -74,7 +74,7 @@
 
 						</tr>
 					</thead>
-					<tbody id="tbl-invoice-body">
+					<tbody id="tbl-generate-invoice-body">
 
 					</tbody>
 				</table>

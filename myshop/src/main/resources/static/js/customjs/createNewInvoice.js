@@ -1,4 +1,7 @@
 //Take i variable for increment raw count
+
+
+
 var i = 0;
 function addRowToTable(id) {
 	var divId = '#' + id + '';
@@ -14,7 +17,7 @@ function addRowToTable(id) {
 
 		var price = Number($(divId).find('#pd-price').text().slice(2)) * Number(quan);
 		//alert(prodId+" "+specification+" "+companyName+" "+model+" "+quan+" "+price);
-		var raw = '<tr id="rawProIdHide" value="' + prodId + '"><td id="rawHideSpeci" value=\'' + specification + '\'>' + (++i) + '</td><td class="text-center" id="rawProductId" value="' + prodId + '">' + prodId + '</td><td class="text-center" id="rawCompanyName" value="'+companyName+'">'+companyName+'</td><td class="text-center" id="rawModel" value="' + model + '">' + model + '</td><td class="text-center" id="rawQuantity" value="' + quan + '">' + quan + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + price + '">' + price + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
+		var raw = '<tr id="rawProIdHide" value="' + prodId + '"><td id="rawHideSpeci" value=\'' + specification + '\'>' + (++i) + '</td><td class="text-center" id="rawProductId" value="' + prodId + '">' + prodId + '</td><td class="text-center" id="rawCompanyName" value="' + companyName + '">' + companyName + '</td><td class="text-center" id="rawModel" value="' + model + '">' + model + '</td><td class="text-center" id="rawQuantity" value="' + quan + '">' + quan + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + price + '">' + price + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
 		addToTableBody(raw, prodId, quan, price);
 		$(divId).find('#error-for-product').hide();
 	}
@@ -58,7 +61,7 @@ function getSubTotal() {
 	});
 
 	$("#subTotal").html(subTotal);
-	$("#perValue").html(Number(12 / 100) * Number(subTotal));
+	$("#perValue").html((Number(12 / 100) * Number(subTotal)).toFixed(2));
 	$("#Total").html(Number(subTotal) + Number(12 / 100) * Number(subTotal));
 }
 function setRowCount() {
@@ -115,9 +118,9 @@ $("#btn-generateInvoice").click(function() {
 			e.preventDefault();
 			if ($('#tbl-invoice-body tr').length > 0) {
 				var data = createJSON();
-				alert(JSON.stringify(data));
-				localStorage.setItem("InvoiceDetails",JSON.stringify(data));
-				//window.location.href = 'generateInvoicePage';
+				localStorage.clear();
+				localStorage.setItem("InvoiceDetails", JSON.stringify(data));
+				window.location.href = 'generateInvoicePage';
 			} else {
 				$("#invoice-fieldSet").removeClass("scheduler-border");
 				$("#invoice-legend").removeClass("scheduler-border");
@@ -135,16 +138,16 @@ function createJSON() {
 
 	jsonObj = [];
 	$("#tbl-invoice-body tr").each(function() {
-		
+
 		subItem = {}
-		subItem["productSpecification"] = $(this).children().eq(0).attr("value");
 		subItem["prodID"] = $(this).children().eq(1).attr("value");
 		subItem["prodCompany"] = $.trim($(this).children().eq(2).attr("value"));
 		subItem["prodModel"] = $(this).children().eq(3).attr("value");
 		subItem["prodQuantity"] = $(this).children().eq(4).attr("value");
 		subItem["prodTotalPrice"] = $(this).children().eq(5).attr("value");
+		subItem["productSpecification"] = JSON.parse($(this).children().eq(0).attr("value"));
 		jsonObj.push(subItem);
-		
+
 	});
 	item = {}
 
@@ -152,7 +155,7 @@ function createJSON() {
 	item["customerMobileNumber"] = $("#customerMobileNumber").val();
 	item["customerAddress"] = $("#customerAddress").val();
 	item["invoiceID"] = $("#setInvoiceID").html();
-	item["invoiceDate"] = $("#invoiceDate").val();	
+	item["invoiceDate"] = $("#invoiceDate").val();
 	item["invoiceDetails"] = jsonObj;
 	item["invoiceSubTotal"] = $("#subTotal").html();
 	item["invoiceTax"] = $("#perValue").html();
@@ -365,3 +368,27 @@ $(document).ready(function() {
 		alert($(this).val());
 	});
 });
+
+if (localStorage.getItem("Edit")) {
+	var data = JSON.parse(localStorage.getItem("InvoiceDetails"));
+
+	$("#setInvoiceID").html(data[0]["invoiceID"]);
+	$("#customerName").val(data[0]["customerName"]);
+	$("#customerAddress").val(data[0]["customerAddress"]);
+	$("#customerMobileNumber").val(data[0]["customerMobileNumber"]);
+	$("#invoiceDate").val(data[0]["invoiceDate"]);
+	$("#subTotal").html(data[0]["invoiceSubTotal"]);
+	$("#perValue").html(data[0]["invoiceTax"]);
+	$("#Total").html(data[0]["invoiceTotal"]);
+
+	var raw = '';
+	$(data[0]["invoiceDetails"]).each(function(i) {
+		raw += '<tr id="rawProIdHide" value="' + data[0]["invoiceDetails"][i]["prodID"] + '"><td id="rawHideSpeci" value=\'' + data[0]["invoiceDetails"][i]["productSpecification"] + '\'>' + (i + 1) + '</td><td class="text-center" id="rawProductId" value="' + data[0]["invoiceDetails"][i]["prodID"] + '">' + data[0]["invoiceDetails"][i]["prodID"] + '</td><td class="text-center" id="rawCompanyName" value="' + data[0]["invoiceDetails"][i]["prodCompany"] + '">' + data[0]["invoiceDetails"][i]["prodCompany"] + '</td><td class="text-center" id="rawModel" value="' + data[0]["invoiceDetails"][i]["prodModel"] + '">' + data[0]["invoiceDetails"][i]["prodModel"] + '</td><td class="text-center" id="rawQuantity" value="' + data[0]["invoiceDetails"][i]["prodQuantity"] + '">' + data[0]["invoiceDetails"][i]["prodQuantity"] + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + data[0]["invoiceDetails"][i]["prodTotalPrice"] + '">' + data[0]["invoiceDetails"][i]["prodTotalPrice"] + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
+	});
+
+	console.log(raw);
+	$("#tbl-invoice-body").append(raw);
+	localStorage.removeItem("Edit");
+	//localStorage.setItem("Edit",false);
+}
+

@@ -24,4 +24,8 @@ public interface InformationProjection {
 		int getProductPrice();
 		int getRemainingQuantity();
 	}
+	
+	interface getOnlyId{
+		long getId();
+	}
 }

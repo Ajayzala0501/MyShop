@@ -15,4 +15,6 @@ public interface ManageProductStockRepository extends JpaRepository<ProductStock
 	List<ProductStockEntity> getStockDetailsByUserId(String userId);
 	
 	ProductStockEntity findByStockIdAndUserId(String stockId,String userId);
+	
+	ProductStockEntity findByProdRefIdAndUserId(long Id,String userId);
 }
