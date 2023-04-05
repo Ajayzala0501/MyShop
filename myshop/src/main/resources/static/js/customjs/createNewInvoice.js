@@ -11,13 +11,15 @@ function addRowToTable(id) {
 		//alert("ok");
 		var prodId = id;
 		var specification = $(divId).find('#hide-speci').val();
-		var companyName = $('#productCompanySelectOption').text();
+		var productType = $('#productTypeSelectOption option:selected').text();
+		var companyName = $('#productCompanySelectOption option:selected').text();
+		
 		var model = $('#productModelSelectOption').val();
 		var quan = $(divId).find('#inputsm').val();
 
 		var price = Number($(divId).find('#pd-price').text().slice(2)) * Number(quan);
 		//alert(prodId+" "+specification+" "+companyName+" "+model+" "+quan+" "+price);
-		var raw = '<tr id="rawProIdHide" value="' + prodId + '"><td id="rawHideSpeci" value=\'' + specification + '\'>' + (++i) + '</td><td class="text-center" id="rawProductId" value="' + prodId + '">' + prodId + '</td><td class="text-center" id="rawCompanyName" value="' + companyName + '">' + companyName + '</td><td class="text-center" id="rawModel" value="' + model + '">' + model + '</td><td class="text-center" id="rawQuantity" value="' + quan + '">' + quan + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + price + '">' + price + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
+		var raw = '<tr id="rawProIdHide" value="' + prodId + '"><td id="rawHideSpeci" value=\'' + specification + '\'>' + (++i) + '</td><td class="text-center" id="rawProductId" value="' + prodId + '">' + prodId + '</td><td class="text-center" id="rawCompanyName" value="' + companyName + '">' + companyName + '</td><td class="text-center" id="rawModel" value="' + model + '">' + model + '</td><td class="text-center" id="rawQuantity" value="' + quan + '">' + quan + '</td><td class="text-center" class="text-navy" id="rawPrice" value="' + price + '">' + price + '</td><td class="text-center" class="text-navy" id="rawProductType" hidden value="' + productType + '">' + productType + '</td><td class="text-navy text-center"><a href="#tbl-invoice"><i style="color:red;" id="btn-delete" class="btn-delete fa fa-trash-o fa-lg"></i></a></td></tr>'
 		addToTableBody(raw, prodId, quan, price);
 		$(divId).find('#error-for-product').hide();
 	}
@@ -137,14 +139,15 @@ function createJSON() {
 	jsonMain = [];
 
 	jsonObj = [];
-	$("#tbl-invoice-body tr").each(function() {
+	$("#tbl-invoice-body tr").each(function(i) {
 
-		subItem = {}
+		var subItem = {};	
 		subItem["prodID"] = $(this).children().eq(1).attr("value");
 		subItem["prodCompany"] = $.trim($(this).children().eq(2).attr("value"));
 		subItem["prodModel"] = $(this).children().eq(3).attr("value");
 		subItem["prodQuantity"] = $(this).children().eq(4).attr("value");
 		subItem["prodTotalPrice"] = $(this).children().eq(5).attr("value");
+		subItem["prodTypes"] = $(this).children().eq(6).attr("value");
 		subItem["productSpecification"] = JSON.parse($(this).children().eq(0).attr("value"));
 		jsonObj.push(subItem);
 

@@ -18,8 +18,6 @@ public class OrganizationModel {
 	
 	private String country;
 	
-
-
 	public String getFirstName() {
 		return firstName;
 	}

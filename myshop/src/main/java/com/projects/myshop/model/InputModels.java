@@ -1,7 +1,38 @@
 package com.projects.myshop.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class InputModels {
 	
+	
+	public static class GetTotalProductAndQuantity{
+		
+		private int totalProduct;
+		
+		private int totalQuantity;
+
+		public GetTotalProductAndQuantity() {
+			super();
+		}
+
+		public int getTotalProduct() {
+			return totalProduct;
+		}
+
+		public void setTotalProduct(int totalProduct) {
+			this.totalProduct = totalProduct;
+		}
+
+		public int getTotalQuantity() {
+			return totalQuantity;
+		}
+
+		public void setTotalQuantity(int totalQuantity) {
+			this.totalQuantity = totalQuantity;
+		}
+		
+	}
 	
 	
 	public static class GetProductInfo{

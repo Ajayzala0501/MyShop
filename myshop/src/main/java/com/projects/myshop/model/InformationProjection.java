@@ -4,6 +4,11 @@ import com.projects.myshop.enitity.ProductStockEntity;
 
 public interface InformationProjection {
 
+	interface getTotalProductAndQuantityCount{
+		int getRemainingQuantity();
+		int getStockQuantity();
+	}
+	
 	interface getCompanyNameOnly{
 		String getCompanyName();
 	}

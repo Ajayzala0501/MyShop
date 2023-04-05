@@ -1,4 +1,3 @@
-
 getAllStockDetails();
 function getAllStockDetails() {
 	$.ajax({
@@ -32,6 +31,7 @@ function generateTable(data) {
 $(document).ready(function() {
 
 $(".btn-open-model").click(function(){
+	debugger
 	$("#hide-stock-id").val($(this).closest('tr').find('input[name="hide-proid"]').val());
 	$("#remainingStock").val($(this).closest('tr').find("td:nth-child(5)").text());
 	$('#myModal').modal('show');
@@ -83,5 +83,6 @@ $(".btn-open-model").click(function(){
 			})
 		}
 	});
-	$('.footable2').footable();
+	$('.footable').footable();
+            $('.footable2').footable();
 });

@@ -136,7 +136,6 @@ public class ManageProductController {
 					.body(new ResponseMessageClass<Object>("Please Do Login First", HttpStatus.BAD_REQUEST, "error"));
 		}
 	}
-
 	@GetMapping("/getAllProductTypes")
 	public ResponseEntity<ResponseMessageClass<Object>> getAllProductTypes(HttpServletRequest request) {
 		Registration re = InfoClass.getCurrentUser(request);
@@ -171,7 +170,7 @@ public class ManageProductController {
 			
 			List<ProductDetailsEntity> pdDetails = manageProductService.getAllProducts(re);
 			for(int i=0; i < pdDetails.size();i++) {
-				pdDetails.get(i).setStockEntity(null);
+				pdDetails.get(i).getStockEntity().setDetailsEntity(null);
 			}
 			
 			return ResponseEntity.status(HttpStatus.OK)

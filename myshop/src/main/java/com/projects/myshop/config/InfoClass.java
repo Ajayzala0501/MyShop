@@ -19,5 +19,4 @@ public class InfoClass {
 		ses.setAttribute("CurrentUser", reg);
 		return (Registration)ses.getAttribute("CurrentUser");
 	}
-
 }

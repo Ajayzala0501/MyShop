@@ -1,31 +1,197 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="base_page ::Layout('MyShop | Home Page',~{::link},~{:: .main-section},~{::script},~{:: .header-section})">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base_page ::Layout('MyShop | Home Page',~{::link},~{:: .main-section},~{::script},~{:: .header-section})">
 <head>
 <title>Add New Product Page</title>
-<link th:href="@{/#}"  rel="stylesheet"></link>
+<link th:href="@{/css/dashboardPage.css}" rel="stylesheet">
+</link>
 </head>
 <body>
-<div class="header-section">
-   <div class="col-sm-4">
-                    <h2>Add New Product</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">This is</a>
-                        </li>
-                        <li class="active">
-                            <strong>Breadcrumb</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-sm-8">
-                    <div class="title-action">
-                        <a href="" class="btn btn-primary">This is action area</a>
-                    </div>
-                </div>
-</div>
-<div class="main-section">
-AAAA
-</div>
-<script th:src="@{/#}"></script>
+	<div class="header-section"></div>
+	<div class="main-section">
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-success pull-right">Total</span>
+						<h5>Total Product</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="dashboardBox">
+							<h1 class="no-margins" id="totalProduct">0</h1>
+							<small>Total Product</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-info pull-right">Total</span>
+						<h5>Total Quantity</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="dashboardBox">
+							<h1 class="no-margins" id="totalQuantity">0</h1>
+
+							<small>Total Quantity</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-primary pull-right">Today</span>
+						<h5>New Product</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="dashboardBox">
+							<h1 class="no-margins" id="todayTotalProduct">0</h1>
+
+							<small>New Product</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-danger pull-right">Today</span>
+						<h5>New Quantity</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="dashboardBox">
+							<h1 class="no-margins" id="todayTotalQuantity">0</h1>
+
+							<small>New Quantity</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<div class="row">
+								<div class="col-lg-8">
+									<h5 style="padding-top: 10px;">Total Count Of Shelling
+										Product And Quantity In Month</h5>
+								</div>
+								<div class="col-lg-2">
+									<select id="year_option_graph_one"
+										class="form-control bg-primary">
+									</select>
+								</div>
+								<div class="col-lg-2">
+									<select id="month_option_grap_one"
+										class="form-control bg-primary">
+
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="ibox-content">
+							<div>
+								<canvas id="barChart" height="110"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<div class="row">
+								<div class="col-lg-3">
+									<h5 style="padding-top: 10px; width: 190px;">Count Of
+										Shelling Quantity</h5>
+								</div>
+								<div class="col-lg-2" style="margin: 0, 10px; width: 120px;">
+									<select id="type_option_grap_two"
+										class="form-control bg-primary">
+										<option value="-1">Type</option>
+									</select>
+								</div>
+								<div class="col-lg-2" style="width: 120px;">
+									<select id="year_option_graph_two"
+										class="form-control bg-primary">
+										<option value="-1">Year</option>
+									</select>
+								</div>
+								<div class="col-lg-2" style="width: 120px;">
+									<select id="month_option_grap_two"
+										class="form-control bg-primary">
+										<option value="-1">Month</option>
+									</select>
+								</div>
+								<div class="col-lg-1">
+									<select id="day_option_grap_two"
+										class="form-control bg-primary" style="width: 76px;">
+										<option value="-1">Day</option>
+									</select>
+
+								</div>
+								<div class="col-lg-2">
+									<select id="model_option_grap_two"
+										class="form-control bg-primary"
+										style="width: 120px; margin-left: 26px;">
+										<option value="-1">Model</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="ibox-content">
+							<div>
+								<canvas id="graph2" height="110"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>
+								Product Model Description
+							</h5>
+							<div class="ibox-tools">
+								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+								</a>
+							</div>
+						</div>
+						<div class="ibox-content">
+							<h2>
+								This is standard IN+ Panel<br />
+							</h2>
+							<p>
+								<strong>Lorem ipsum dolor</strong> Aenean commodo ligula eget
+								dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+								parturient montes, nascetur ridiculus mus. Donec quam felis,
+								ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+								consequat massa quis enim.
+							</p>
+							<p>
+								<small> Donec pede justo, fringilla vel, aliquet nec,
+									vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+									venenatis vitae, justo. Nullam dictum felis eu pede mollis
+									pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+									semper nisi. </small>
+							</p>
+						</div>
+						<div class="ibox-footer">This is simple footer example</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ChartJS-->
+	<script th:src="@{/js/plugins/chartJs/Chart.min.js}"></script>
+	<script th:src="@{/js/customjs/dashboardPage.js}"></script>
 </body>
 </html>

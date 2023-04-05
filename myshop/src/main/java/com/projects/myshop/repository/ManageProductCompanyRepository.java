@@ -19,6 +19,5 @@ public interface ManageProductCompanyRepository extends JpaRepository<ProductCom
 	
 	//@Query(value = "SELECT company_name FROM product_company_entity where company_id =?1 and org_ref_id = ?2")
 	//String getCompanyNameById(String compName,String userID);
-	
 	InformationProjection.getCompanyNameOnly findByCompanyIdAndOrgRefId(String compName,String userID);
 }

@@ -23,7 +23,6 @@ public class ExceptionResponseClass extends ResponseEntityExceptionHandler {
 				HttpStatus.ALREADY_REPORTED, "warning");
 		return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(re);
 	}
-
 	@ExceptionHandler(EmailNotRegistered.class)
 	public ResponseEntity<ResponseMessageClass<Object>> emailNotRegistered(EmailNotRegistered emailNotRegistered) {
 		ResponseMessageClass<Object> re = new ResponseMessageClass<>(emailNotRegistered.getMessage(),

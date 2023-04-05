@@ -1,7 +1,9 @@
 package com.projects.myshop.Service.Impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONArray;
@@ -38,16 +40,20 @@ public class ManageCustomerInvoiceDetailsServiceImpl implements ManageCustomerIn
 		//detailsEntity.getCustomerInvoiceProductDetails().replaceAll("\"", "\'");
 		
 		JSONArray jsonArray = new JSONArray(detailsEntity.getCustomerInvoiceProductDetails());
-		List<String> prodList = new ArrayList<>();
+		Map<String,Integer> prodList = new HashMap();
 		for(int i=0; i< jsonArray.length();i++) {
 			JSONObject rec = jsonArray.getJSONObject(i);
-			String id = rec.getString("prodID");
-			prodList.add(id);
+			prodList.put(rec.getString("prodID"), Integer.valueOf(rec.getString("prodQuantity")));
 		}
 		//JSONObject jsonObject = new JSONObject();
-		for(int i=0; i < prodList.size();i++) {
-		InformationProjection.getOnlyId obj = detailsRepository.findByProdIdAndUserId(prodList.get(i), re.getOrgid());
-		ProductStockEntity entity =  productStockRepository.findByProdRefIdAndUserId(obj.getId(), re.getOrgid());
+		
+		for(String keys : prodList.keySet()) {
+			InformationProjection.getOnlyId obj = detailsRepository.findByProdIdAndUserId(keys , re.getOrgid());
+			ProductStockEntity StockEntity =  productStockRepository.findByDetailsEntityIdAndUserId(obj.getId(), re.getOrgid());
+			StockEntity.setRemainingQuantity(StockEntity.getRemainingQuantity()-prodList.get(keys));
+			productStockRepository.save(StockEntity);
+			
+			
 		}
 		CustomerInvoiceDetailsEntity entity =  new CustomerInvoiceDetailsEntity();
 		entity.setCustomerName(detailsEntity.getCustomerName());
@@ -61,6 +67,12 @@ public class ManageCustomerInvoiceDetailsServiceImpl implements ManageCustomerIn
 		entity.setInvoiceDate(detailsEntity.getInvoiceDate());
 		
 		return customerInvoiceDetailsRepository.save(entity);
+	}
+
+	@Override
+	public List<CustomerInvoiceDetailsEntity> getAllInvoiceDetails(String orgid) {
+		// TODO Auto-generated method stub
+		return customerInvoiceDetailsRepository.findByUserID(orgid) ;
 	}
 
 }

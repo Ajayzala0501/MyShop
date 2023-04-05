@@ -146,8 +146,6 @@ public class Registration  {
 	public void setTokenExpirationTime(Date tokenExpirationTime) {
 		this.tokenExpirationTime = tokenExpirationTime;
 	}
-
-	
 }
 
 

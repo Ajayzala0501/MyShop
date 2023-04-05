@@ -21,6 +21,7 @@ import com.projects.myshop.config.InfoClass;
 import com.projects.myshop.config.ResponseMessageClass;
 import com.projects.myshop.enitity.ProductStockEntity;
 import com.projects.myshop.enitity.Registration;
+import com.projects.myshop.model.InputModels;
 import com.projects.myshop.model.StockDisplayModel;
 
 @RestController
@@ -77,5 +78,42 @@ public class ManageProductStockController {
 		else {		
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
 		}		
+	}
+	
+	@GetMapping("/getTotalProductAndQuantity")
+	public ResponseEntity<ResponseMessageClass<Object>> getTotalProductAndQuantity(HttpServletRequest request){
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {	
+			
+			Object totalCount  = manageProductStockService.getTotalProductAndQuantity(re.getOrgid());
+			if(totalCount != null) {
+
+				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(totalCount, HttpStatus.OK, "success"));	
+			}else {
+				return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(new ResponseMessageClass<Object>("Product Stock Not Updated", HttpStatus.FAILED_DEPENDENCY, "warning"));	
+					
+			}
+		}
+		else {		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
+		}
+	}
+	@GetMapping("/getTodayTotalProductAndQuantity")
+	public ResponseEntity<ResponseMessageClass<Object>> getTodayTotalProductAndQuantity(HttpServletRequest request){
+		Registration re = InfoClass.getCurrentUser(request);	
+		if(re != null) {	
+			
+			Object totalCount  = manageProductStockService.getTodayTotalProductAndQuantity(re.getOrgid());
+			if(totalCount != null) {
+
+				return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageClass<Object>(totalCount, HttpStatus.OK, "success"));	
+			}else {
+				return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(new ResponseMessageClass<Object>("Product Stock Not Updated", HttpStatus.FAILED_DEPENDENCY, "warning"));	
+					
+			}
+		}
+		else {		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessageClass<Object>("Please Do Login First",HttpStatus.BAD_REQUEST,"error"));
+		}
 	}
 }
